@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head ><meta charset="UTF-8" /><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",t=>{this.persisted=t.persisted}),window.addEventListener("DOMContentLoaded",()=>{this._preconnect3rdParties()}),this.delayedScripts={normal:[],async:[],defer:[]},this.trash=[],this.allJQueries=[]}_addUserInteractionListener(t){if(document.hidden){t._triggerListener();return}this.triggerEvents.forEach(e=>window.addEventListener(e,t.userEventHandler,{passive:!0})),window.addEventListener("touchstart",t.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",t.touchStartHandler),document.addEventListener("visibilitychange",t.userEventHandler)}_removeUserInteractionListener(){this.triggerEvents.forEach(t=>window.removeEventListener(t,this.userEventHandler,{passive:!0})),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(t){"HTML"!==t.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),t.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(t.target,"onclick","rocket-onclick"),this._pendingClickStarted())}_onTouchMove(t){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),t.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(t.target,"rocket-onclick","onclick"),this._pendingClickFinished()}_onTouchEnd(t){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(t){t.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(t.target,"rocket-onclick","onclick"),this.interceptedClicks.push(t),t.preventDefault(),t.stopPropagation(),t.stopImmediatePropagation(),this._pendingClickFinished()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach(t=>{t.target.dispatchEvent(new MouseEvent("click",{view:t.view,bubbles:!0,cancelable:!0}))})}_waitForPendingClicks(){return new Promise(t=>{this._isClickPending?this._pendingClickFinished=t:t()})}_pendingClickStarted(){this._isClickPending=!0}_pendingClickFinished(){this._isClickPending=!1}_renameDOMAttribute(t,e,r){t.hasAttribute&&t.hasAttribute(e)&&(event.target.setAttribute(r,event.target.getAttribute(e)),event.target.removeAttribute(e))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let t=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(e=>{if(e.hasAttribute("src")){let r=new URL(e.src).origin;r!==location.origin&&t.push({src:r,crossOrigin:e.crossOrigin||"module"===e.getAttribute("data-rocket-type")})}}),t=[...new Map(t.map(t=>[JSON.stringify(t),t])).values()],this._batchInjectResourceHints(t,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(this),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(t){console.error(t)}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._waitForPendingClicks().then(()=>{this._replayClicks()}),this._emptyTrash()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(t=>{t.hasAttribute("data-rocket-src")?t.hasAttribute("async")&&!1!==t.async?this.delayedScripts.async.push(t):t.hasAttribute("defer")&&!1!==t.defer||"module"===t.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(t):this.delayedScripts.normal.push(t):this.delayedScripts.normal.push(t)})}async _transformScript(t){return new Promise((await this._littleBreath(),navigator.userAgent.indexOf("Firefox/")>0||""===navigator.vendor)?e=>{let r=document.createElement("script");[...t.attributes].forEach(t=>{let e=t.nodeName;"type"!==e&&("data-rocket-type"===e&&(e="type"),"data-rocket-src"===e&&(e="src"),r.setAttribute(e,t.nodeValue))}),t.text&&(r.text=t.text),r.hasAttribute("src")?(r.addEventListener("load",e),r.addEventListener("error",e)):(r.text=t.text,e());try{t.parentNode.replaceChild(r,t)}catch(i){e()}}:async e=>{function r(){t.setAttribute("data-rocket-status","failed"),e()}try{let i=t.getAttribute("data-rocket-type"),n=t.getAttribute("data-rocket-src");t.text,i?(t.type=i,t.removeAttribute("data-rocket-type")):t.removeAttribute("type"),t.addEventListener("load",function r(){t.setAttribute("data-rocket-status","executed"),e()}),t.addEventListener("error",r),n?(t.removeAttribute("data-rocket-src"),t.src=n):t.src="data:text/javascript;base64,"+window.btoa(unescape(encodeURIComponent(t.text)))}catch(s){r()}})}async _loadScriptsFromList(t){let e=t.shift();return e&&e.isConnected?(await this._transformScript(e),this._loadScriptsFromList(t)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(t,e){var r=document.createDocumentFragment();t.forEach(t=>{let i=t.getAttribute&&t.getAttribute("data-rocket-src")||t.src;if(i){let n=document.createElement("link");n.href=i,n.rel=e,"preconnect"!==e&&(n.as="script"),t.getAttribute&&"module"===t.getAttribute("data-rocket-type")&&(n.crossOrigin=!0),t.crossOrigin&&(n.crossOrigin=t.crossOrigin),t.integrity&&(n.integrity=t.integrity),r.appendChild(n),this.trash.push(n)}}),document.head.appendChild(r)}_delayEventListeners(t){let e={};function r(t,r){!function t(r){!e[r]&&(e[r]={originalFunctions:{add:r.addEventListener,remove:r.removeEventListener},eventsToRewrite:[]},r.addEventListener=function(){arguments[0]=i(arguments[0]),e[r].originalFunctions.add.apply(r,arguments)},r.removeEventListener=function(){arguments[0]=i(arguments[0]),e[r].originalFunctions.remove.apply(r,arguments)});function i(t){return e[r].eventsToRewrite.indexOf(t)>=0?"rocket-"+t:t}}(t),e[t].eventsToRewrite.push(r)}function i(t,e){let r=t[e];Object.defineProperty(t,e,{get:()=>r||function(){},set(i){t["rocket"+e]=r=i}})}r(document,"DOMContentLoaded"),r(window,"DOMContentLoaded"),r(window,"load"),r(window,"pageshow"),r(document,"readystatechange"),i(document,"onreadystatechange"),i(window,"onload"),i(window,"onpageshow")}_delayJQueryReady(t){let e;function r(r){if(r&&r.fn&&!t.allJQueries.includes(r)){r.fn.ready=r.fn.init.prototype.ready=function(e){return t.domReadyFired?e.bind(document)(r):document.addEventListener("rocket-DOMContentLoaded",()=>e.bind(document)(r)),r([])};let i=r.fn.on;r.fn.on=r.fn.init.prototype.on=function(){if(this[0]===window){function t(t){return t.split(" ").map(t=>"load"===t||0===t.indexOf("load.")?"rocket-jquery-load":t).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=t(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach(e=>{delete Object.assign(arguments[0],{[t(e)]:arguments[0][e]})[e]})}return i.apply(this,arguments),this},t.allJQueries.push(r)}e=r}r(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>e,set(t){r(t)}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach(t=>t(window).trigger("rocket-jquery-load")),await this._littleBreath();let t=new Event("rocket-pageshow");t.persisted=this.persisted,window.dispatchEvent(t),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){let t=new Map;document.write=document.writeln=function(e){let r=document.currentScript;r||console.error("WPRocket unable to document.write this: "+e);let i=document.createRange(),n=r.parentElement,s=t.get(r);void 0===s&&(s=r.nextSibling,t.set(r,s));let a=document.createDocumentFragment();i.setStart(a,0),a.appendChild(i.createContextualFragment(e)),n.insertBefore(a,s)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise(t=>setTimeout(t)):new Promise(t=>requestAnimationFrame(t))}_emptyTrash(){this.trash.forEach(t=>t.remove())}static run(){let t=new RocketLazyLoadScripts;t._addUserInteractionListener(t)}}RocketLazyLoadScripts.run();</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v20.4 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Airbnb Stock: Should You Invest in the Company Today?</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Lato%3A400%2C700%2C900&#038;display=swap" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato%3A400%2C700%2C900&#038;display=swap" media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato%3A400%2C700%2C900&#038;display=swap" /></noscript>
+	<meta name="description" content="Learn how to prepare for the upcoming Airbnb IPO. Explore ways to buy Airbnb stock and follow along as the company approaches its IPO date." />
+	<link rel="canonical" href="https://www.retirebeforedad.com/airbnb-stock/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Airbnb Stock: Should You Invest in the Company Today?" />
+	<meta property="og:description" content="Learn how to prepare for the upcoming Airbnb IPO. Explore ways to buy Airbnb stock and follow along as the company approaches its IPO date." />
+	<meta property="og:url" content="https://www.retirebeforedad.com/airbnb-stock/" />
+	<meta property="og:site_name" content="Retire Before Dad" />
+	<meta property="article:modified_time" content="2023-01-13T14:57:37+00:00" />
+	<meta property="og:image" content="https://www.retirebeforedad.com/wp-content/uploads/2019/06/Airbnb_Logo.png" />
+	<meta property="og:image:width" content="750" />
+	<meta property="og:image:height" content="400" />
+	<meta property="og:image:type" content="image/png" />
+	<meta name="twitter:label1" content="Est. reading time" />
+	<meta name="twitter:data1" content="15 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.retirebeforedad.com/airbnb-stock/","url":"https://www.retirebeforedad.com/airbnb-stock/","name":"Airbnb Stock: Should You Invest in the Company Today?","isPartOf":{"@id":"https://www.retirebeforedad.com/#website"},"primaryImageOfPage":{"@id":"https://www.retirebeforedad.com/airbnb-stock/#primaryimage"},"image":{"@id":"https://www.retirebeforedad.com/airbnb-stock/#primaryimage"},"thumbnailUrl":"https://www.retirebeforedad.com/wp-content/uploads/2019/06/Airbnb_Logo.png","datePublished":"2023-01-13T14:30:26+00:00","dateModified":"2023-01-13T14:57:37+00:00","description":"Learn how to prepare for the upcoming Airbnb IPO. Explore ways to buy Airbnb stock and follow along as the company approaches its IPO date.","breadcrumb":{"@id":"https://www.retirebeforedad.com/airbnb-stock/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.retirebeforedad.com/airbnb-stock/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.retirebeforedad.com/airbnb-stock/#primaryimage","url":"https://www.retirebeforedad.com/wp-content/uploads/2019/06/Airbnb_Logo.png","contentUrl":"https://www.retirebeforedad.com/wp-content/uploads/2019/06/Airbnb_Logo.png","width":750,"height":400},{"@type":"BreadcrumbList","@id":"https://www.retirebeforedad.com/airbnb-stock/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.retirebeforedad.com/"},{"@type":"ListItem","position":2,"name":"Airbnb Stock: Should You Invest in the Company Today?"}]},{"@type":"WebSite","@id":"https://www.retirebeforedad.com/#website","url":"https://www.retirebeforedad.com/","name":"Retire Before Dad","description":"","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.retirebeforedad.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//scripts.mediavine.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//use.fontawesome.com' />
+<link rel='dns-prefetch' href='//v0.wordpress.com' />
+<link rel='dns-prefetch' href='//jetpack.wordpress.com' />
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//public-api.wordpress.com' />
+<link rel='dns-prefetch' href='//0.gravatar.com' />
+<link rel='dns-prefetch' href='//1.gravatar.com' />
+<link rel='dns-prefetch' href='//2.gravatar.com' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title="Retire Before Dad &raquo; Feed" href="https://www.retirebeforedad.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Retire Before Dad &raquo; Comments Feed" href="https://www.retirebeforedad.com/comments/feed/" />
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link data-minify="1" rel='stylesheet' id='retire-before-dad-custom-theme-by-moonsteam-design-css' href='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/themes/md_retirebeforedad/style.css?ver=1680444726' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css' href='https://www.retirebeforedad.com/wp-includes/css/dist/block-library/style.min.css?ver=73deacfcd4fb215c15193f1c4f9aa7a9' type='text/css' media='all' />
+<style id='wp-block-library-inline-css' type='text/css'>
+.has-text-align-justify{text-align:justify;}
+</style>
+<link rel='stylesheet' id='mediaelement-css' href='https://www.retirebeforedad.com/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css?ver=4.2.17' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-mediaelement-css' href='https://www.retirebeforedad.com/wp-includes/js/mediaelement/wp-mediaelement.min.css?ver=73deacfcd4fb215c15193f1c4f9aa7a9' type='text/css' media='all' />
+<link rel='stylesheet' id='classic-theme-styles-css' href='https://www.retirebeforedad.com/wp-includes/css/classic-themes.min.css?ver=1' type='text/css' media='all' />
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link data-minify="1" rel='stylesheet' id='sfmsb-style-css' href='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/plugins/simple-follow-me-social-buttons-widget/assets/css/style.css?ver=1680444726' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='sfmsb-icons-css' href='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/plugins/simple-follow-me-social-buttons-widget/assets/css/icons.css?ver=1680444726' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='wp-polls-css' href='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/plugins/wp-polls/polls-css.css?ver=1680444726' type='text/css' media='all' />
+<style id='wp-polls-inline-css' type='text/css'>
+.wp-polls .pollbar {
+	margin: 1px;
+	font-size: 8px;
+	line-height: 10px;
+	height: 10px;
+	background: #85c226;
+	border: 1px solid #848180;
+}
+
+</style>
+<link rel='stylesheet' id='ez-toc-css' href='https://www.retirebeforedad.com/wp-content/plugins/easy-table-of-contents/assets/css/screen.min.css?ver=2.0.46' type='text/css' media='all' />
+<style id='ez-toc-inline-css' type='text/css'>
+div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container nav ul ul li ul li {font-size: %!important;}div#ez-toc-container {background: #fff;border: 1px solid #ddd;}div#ez-toc-container p.ez-toc-title {color: #529136;}div#ez-toc-container ul.ez-toc-list a {color: #007cc2;}div#ez-toc-container ul.ez-toc-list a:hover {color: #2a6496;}div#ez-toc-container ul.ez-toc-list a:visited {color: #428bca;}
+</style>
+<link data-minify="1" rel='stylesheet' id='dashicons-css' href='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-includes/css/dashicons.min.css?ver=1680444726' type='text/css' media='all' />
+
+<link data-minify="1" rel='stylesheet' id='font-awesome-free-css' href='https://www.retirebeforedad.com/wp-content/cache/min/1/releases/v5.2.0/css/all.css?ver=1680444726' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='style3-css' href='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/themes/md_retirebeforedad/css/style3.css?ver=1680444726' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='gca-column-styles-css' href='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/plugins/genesis-columns-advanced/css/gca-column-styles.css?ver=1680444726' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='fontawesome-css' href='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/plugins/wp-review-pro/public/css/font-awesome.min.css?ver=1680444726' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='wp_review-style-css' href='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/plugins/wp-review-pro/public/css/wp-review.css?ver=1680444726' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='forget-about-shortcode-buttons-css' href='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/plugins/forget-about-shortcode-buttons/public/css/button-styles.css?ver=1680444726' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='inc-frontend-css' href='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/plugins/imark-interactive-toolkit/frontend/css/inc-frontend-style.css?ver=1680444726' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='imp-frontend-css' href='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/plugins/imark-interactive-toolkit/frontend/css/imp-frontend-style.css?ver=1680444726' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='social-logos-css' href='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/plugins/jetpack/_inc/social-logos/social-logos.min.css?ver=1680444726' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='jetpack_css-css' href='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/plugins/jetpack/css/jetpack.css?ver=1680444726' type='text/css' media='all' />
+<script type='text/javascript' id='jquery-core-js-extra'>
+/* <![CDATA[ */
+var SDT_DATA = {"ajaxurl":"https:\/\/www.retirebeforedad.com\/wp-admin\/admin-ajax.php","siteUrl":"https:\/\/www.retirebeforedad.com\/","pluginsUrl":"https:\/\/www.retirebeforedad.com\/wp-content\/plugins","isAdmin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.retirebeforedad.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.1' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://www.retirebeforedad.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js' defer></script>
+<script type='text/javascript' async="async" data-noptimize="1" data-cfasync="false" src='https://scripts.mediavine.com/tags/retire-before-dad.js?ver=73deacfcd4fb215c15193f1c4f9aa7a9' id='mv-script-wrapper-js'></script>
+<script data-minify="1" type='text/javascript' src='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/plugins/simple-follow-me-social-buttons-widget/assets/js/front-widget.js?ver=1680444726' id='sfmsb-script-js' defer></script>
+<script type='text/javascript' id='ez-toc-scroll-scriptjs-js-after'>
+jQuery(document).ready(function(){document.querySelectorAll(".ez-toc-section").forEach(t=>{t.setAttribute("ez-toc-data-id","#"+decodeURI(t.getAttribute("id")))}),jQuery("a.ez-toc-link").click(function(){let t=jQuery(this).attr("href"),e=jQuery("#wpadminbar"),i=0;30>30&&(i=30),e.length&&(i+=e.height()),jQuery('[ez-toc-data-id="'+decodeURI(t)+'"]').length>0&&(i=jQuery('[ez-toc-data-id="'+decodeURI(t)+'"]').offset().top-i),jQuery("html, body").animate({scrollTop:i},500)})});
+</script>
+<script data-minify="1" type='text/javascript' src='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/themes/md_retirebeforedad/js/md.js?ver=1680444726' id='mdjs-js' defer></script>
+<script data-minify="1" type='text/javascript' src='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/themes/md_retirebeforedad/js/modernizr.custom.js?ver=1680444726' id='modernizr-js' defer></script>
+<link rel="https://api.w.org/" href="https://www.retirebeforedad.com/wp-json/" /><link rel="alternate" type="application/json" href="https://www.retirebeforedad.com/wp-json/wp/v2/pages/60234" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.retirebeforedad.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.retirebeforedad.com/wp-includes/wlwmanifest.xml" />
+
+<link rel='shortlink' href='https://wp.me/P4fJ1N-fFw' />
+<link rel="alternate" type="application/json+oembed" href="https://www.retirebeforedad.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.retirebeforedad.com%2Fairbnb-stock%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.retirebeforedad.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.retirebeforedad.com%2Fairbnb-stock%2F&#038;format=xml" />
+        <script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+            ( function () {
+                window.lae_fs = { can_use_premium_code: false};
+            } )();
+        </script>
+        <!-- Global site tag (gtag.js) - Google Analytics code - moved from Canvas area 03.01.2019 -->
+<script type="rocketlazyloadscript" async data-rocket-src="https://www.googletagmanager.com/gtag/js?id=UA-45549390-1"></script>
+<script type="rocketlazyloadscript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-45549390-1');
+</script>
+<!-- END Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics 4.0 04/19/2022 -->
+<script type="rocketlazyloadscript" async data-rocket-src="https://www.googletagmanager.com/gtag/js?id=G-N1MW33LXVJ"></script>
+<script type="rocketlazyloadscript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N1MW33LXVJ');
+</script>
+<!-- END Google Analytics 4.0 Installed 04/19/2022 -->
+
+<!-- MediaVine CSP Code Installed 11.19.2017 -->
+<meta http-equiv="Content-Security-Policy" content="block-all-mixed-content" />
+<!-- End MediaVine CSP Code -->
+
+<!-- Google G Suite Verification Code -->
+<meta name="google-site-verification" content="7EEsQEnos5W9AxpfATXYXV99n5oF_5okFIqvIbq7TYQ" />
+<!-- Google G Suite Verification Code Code -->
+
+<!-- MyBankTracker Installed 11.06.2018 -->
+<script data-minify="1" src="https://www.retirebeforedad.com/wp-content/cache/min/1/widget_set/c7ac73/widget_set.js?ver=1680444726" async></script>
+<!-- End MyBankTracker Code -->
+
+<!-- Vanguard Quinstreet Re-Installed 05.31.2022 -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="//www.nextinsure.com/listingdisplay/loader/sh"></script>
+<!-- End Vanguard Quinstreet Re-Installed 05.31.2022 -->
+
+<!-- Impact Verification Code -->
+<meta name='ir-site-verification-token' value='-400319739' />
+<!-- End Impact Verification Code -->	<style>img#wpstats{display:none}</style>
+		<meta name="generator" content="Elementor 3.12.1; features: a11y_improvements, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto">
+<style type="text/css">.saboxplugin-wrap{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;border:1px solid #eee;width:100%;clear:both;display:block;overflow:hidden;word-wrap:break-word;position:relative}.saboxplugin-wrap .saboxplugin-gravatar{float:left;padding:0 20px 20px 20px}.saboxplugin-wrap .saboxplugin-gravatar img{max-width:100px;height:auto;border-radius:0;}.saboxplugin-wrap .saboxplugin-authorname{font-size:18px;line-height:1;margin:20px 0 0 20px;display:block}.saboxplugin-wrap .saboxplugin-authorname a{text-decoration:none}.saboxplugin-wrap .saboxplugin-authorname a:focus{outline:0}.saboxplugin-wrap .saboxplugin-desc{display:block;margin:5px 20px}.saboxplugin-wrap .saboxplugin-desc a{text-decoration:underline}.saboxplugin-wrap .saboxplugin-desc p{margin:5px 0 12px}.saboxplugin-wrap .saboxplugin-web{margin:0 20px 15px;text-align:left}.saboxplugin-wrap .sab-web-position{text-align:right}.saboxplugin-wrap .saboxplugin-web a{color:#ccc;text-decoration:none}.saboxplugin-wrap .saboxplugin-socials{position:relative;display:block;background:#fcfcfc;padding:5px;border-top:1px solid #eee}.saboxplugin-wrap .saboxplugin-socials a svg{width:20px;height:20px}.saboxplugin-wrap .saboxplugin-socials a svg .st2{fill:#fff; transform-origin:center center;}.saboxplugin-wrap .saboxplugin-socials a svg .st1{fill:rgba(0,0,0,.3)}.saboxplugin-wrap .saboxplugin-socials a:hover{opacity:.8;-webkit-transition:opacity .4s;-moz-transition:opacity .4s;-o-transition:opacity .4s;transition:opacity .4s;box-shadow:none!important;-webkit-box-shadow:none!important}.saboxplugin-wrap .saboxplugin-socials .saboxplugin-icon-color{box-shadow:none;padding:0;border:0;-webkit-transition:opacity .4s;-moz-transition:opacity .4s;-o-transition:opacity .4s;transition:opacity .4s;display:inline-block;color:#fff;font-size:0;text-decoration:inherit;margin:5px;-webkit-border-radius:0;-moz-border-radius:0;-ms-border-radius:0;-o-border-radius:0;border-radius:0;overflow:hidden}.saboxplugin-wrap .saboxplugin-socials .saboxplugin-icon-grey{text-decoration:inherit;box-shadow:none;position:relative;display:-moz-inline-stack;display:inline-block;vertical-align:middle;zoom:1;margin:10px 5px;color:#444;fill:#444}.clearfix:after,.clearfix:before{content:' ';display:table;line-height:0;clear:both}.ie7 .clearfix{zoom:1}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-twitch{border-color:#38245c}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-addthis{border-color:#e91c00}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-behance{border-color:#003eb0}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-delicious{border-color:#06c}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-deviantart{border-color:#036824}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-digg{border-color:#00327c}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-dribbble{border-color:#ba1655}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-facebook{border-color:#1e2e4f}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-flickr{border-color:#003576}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-github{border-color:#264874}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-google{border-color:#0b51c5}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-googleplus{border-color:#96271a}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-html5{border-color:#902e13}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-instagram{border-color:#1630aa}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-linkedin{border-color:#00344f}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-pinterest{border-color:#5b040e}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-reddit{border-color:#992900}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-rss{border-color:#a43b0a}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-sharethis{border-color:#5d8420}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-skype{border-color:#00658a}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-soundcloud{border-color:#995200}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-spotify{border-color:#0f612c}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-stackoverflow{border-color:#a95009}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-steam{border-color:#006388}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-user_email{border-color:#b84e05}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-stumbleUpon{border-color:#9b280e}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-tumblr{border-color:#10151b}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-twitter{border-color:#0967a0}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-vimeo{border-color:#0d7091}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-windows{border-color:#003f71}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-whatsapp{border-color:#003f71}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-wordpress{border-color:#0f3647}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-yahoo{border-color:#14002d}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-youtube{border-color:#900}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-xing{border-color:#000202}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-mixcloud{border-color:#2475a0}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-vk{border-color:#243549}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-medium{border-color:#00452c}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-quora{border-color:#420e00}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-meetup{border-color:#9b181c}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-goodreads{border-color:#000}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-snapchat{border-color:#999700}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-500px{border-color:#00557f}.saboxplugin-socials.sabox-colored .saboxplugin-icon-color .sab-mastodont{border-color:#185886}.sabox-plus-item{margin-bottom:20px}@media screen and (max-width:480px){.saboxplugin-wrap{text-align:center}.saboxplugin-wrap .saboxplugin-gravatar{float:none;padding:20px 0;text-align:center;margin:0 auto;display:block}.saboxplugin-wrap .saboxplugin-gravatar img{float:none;display:inline-block;display:-moz-inline-stack;vertical-align:middle;zoom:1}.saboxplugin-wrap .saboxplugin-desc{margin:0 10px 20px;text-align:center}.saboxplugin-wrap .saboxplugin-authorname{text-align:center;margin:10px 0 20px}}body .saboxplugin-authorname a,body .saboxplugin-authorname a:hover{box-shadow:none;-webkit-box-shadow:none}a.sab-profile-edit{font-size:16px!important;line-height:1!important}.sab-edit-settings a,a.sab-profile-edit{color:#0073aa!important;box-shadow:none!important;-webkit-box-shadow:none!important}.sab-edit-settings{margin-right:15px;position:absolute;right:0;z-index:2;bottom:10px;line-height:20px}.sab-edit-settings i{margin-left:5px}.saboxplugin-socials{line-height:1!important}.rtl .saboxplugin-wrap .saboxplugin-gravatar{float:right}.rtl .saboxplugin-wrap .saboxplugin-authorname{display:flex;align-items:center}.rtl .saboxplugin-wrap .saboxplugin-authorname .sab-profile-edit{margin-right:10px}.rtl .sab-edit-settings{right:auto;left:0}img.sab-custom-avatar{max-width:75px;}.saboxplugin-wrap .saboxplugin-socials .saboxplugin-icon-color {-webkit-border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;-o-border-radius:50%;border-radius:50%;}.saboxplugin-wrap .saboxplugin-socials .saboxplugin-icon-color .st1 {display: none;}.saboxplugin-wrap {margin-top:0px; margin-bottom:0px; padding: 0px 0px }.saboxplugin-wrap .saboxplugin-authorname {font-size:18px; line-height:25px;}.saboxplugin-wrap .saboxplugin-desc p, .saboxplugin-wrap .saboxplugin-desc {font-size:14px !important; line-height:21px !important;}.saboxplugin-wrap .saboxplugin-web {font-size:14px;}.saboxplugin-wrap .saboxplugin-socials a svg {width:36px;height:36px;}</style><link rel="icon" href="https://www.retirebeforedad.com/wp-content/uploads/2015/10/RetireBeforeDad-Favicon.png" sizes="32x32" />
+<link rel="icon" href="https://www.retirebeforedad.com/wp-content/uploads/2015/10/RetireBeforeDad-Favicon.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.retirebeforedad.com/wp-content/uploads/2015/10/RetireBeforeDad-Favicon.png" />
+<meta name="msapplication-TileImage" content="https://www.retirebeforedad.com/wp-content/uploads/2015/10/RetireBeforeDad-Favicon.png" />
+<style type="text/css" id="wp-custom-css">/* Content area width on desktop THIS HELPS CHANGE THE WIDTH AND SIDEBAR % */
+.content {
+	width: 69%;
+}
+
+/* Body font Color Change */
+body {
+	color: #555;
+}
+
+/** Begin Mediavine Sidebar Fix **/
+@media only screen and (min-width: 801px) {
+.content-sidebar .sidebar-primary {
+    min-width: 300px !important;
+}
+.content-sidebar .content {
+    max-width: calc(100% - 330px) !important;
+}
+}
+/** End Mediavine Sidebar Fix **/
+
+/* Size of the read more link on front page */
+.more-link {
+	font-size: 24px;
+}
+
+/* Change disclosure Widget Font */
+.md-pd {
+    font-family: 'Helvetica', sans-serif;
+}
+
+/* Change photo caption font */
+.wp-caption-text {
+    font-family: 'Helvetica', sans-serif;
+}
+
+/* Stops horizonal scrolling for "pre" tag. Formats boarder style. For YieldCurve */
+pre {
+	background: #f7f7f7;
+	color: #54595F;
+	overflow: auto;
+	padding: 10px 20px 10px;
+	font-size: 14px;
+	white-space: pre-wrap;
+	border-style: inset;
+}
+
+/* Change Sub Menu format */
+.genesis-nav-menu .sub-menu a {
+    text-transform: capitalize;
+	  font-size: 16px;
+		padding: 12px 12px;
+	  font-weight: normal;
+}</style><noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript></head>
+<body class="page-template-default page page-id-60234 content-sidebar genesis-breadcrumbs-hidden genesis-footer-widgets-visible elementor-default elementor-kit-64395"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0.49803921568627" /><feFuncG type="table" tableValues="0 0.49803921568627" /><feFuncB type="table" tableValues="0 0.49803921568627" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 0.27843137254902" /><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0" /><feFuncG type="table" tableValues="0 0.64705882352941" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.78039215686275 1" /><feFuncG type="table" tableValues="0 0.94901960784314" /><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.44705882352941 0.4" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.098039215686275 1" /><feFuncG type="table" tableValues="0 0.66274509803922" /><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><div class="site-container"><header class="site-header"><div class="wrap"><div class="title-area"><p class="site-title"><a href="https://www.retirebeforedad.com/">Retire Before Dad</a></p></div><div class="widget-area header-widget-area"><section id="custom_html-2" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><div class="textwidget custom-html-widget"><li class="menu-item"><a id="trigger-overlay" class="search-icon" href="#"><i class="fa fa-search"></i></a></li></div></div></section>
+</div><nav class="nav-primary" aria-label="Main"><div class="wrap"><ul id="menu-primary-menu" class="menu genesis-nav-menu menu-primary"><li id="menu-item-13674" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-13674"><a href="https://www.retirebeforedad.com/retire-before-dad-story/"><span ><b>Start!</b></span></a>
+<ul class="sub-menu">
+	<li id="menu-item-75729" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-75729"><a href="https://www.retirebeforedad.com/about-me/"><span >About</span></a></li>
+	<li id="menu-item-13675" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13675"><a href="https://www.retirebeforedad.com/retire-before-dad-story/"><span >RBD Story</span></a></li>
+	<li id="menu-item-2238" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2238"><a href="https://www.retirebeforedad.com/featured/"><span >Featured on…</span></a></li>
+	<li id="menu-item-1378" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1378"><a href="https://www.retirebeforedad.com/archive/"><span >Archive</span></a></li>
+	<li id="menu-item-59902" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-59902"><a href="https://www.retirebeforedad.com/portfolio/"><span >Portfolio</span></a></li>
+	<li id="menu-item-54380" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-54380"><a href="https://www.retirebeforedad.com/guest-post-policy/"><span >Guest Post Policy</span></a></li>
+	<li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://www.retirebeforedad.com/contact-me/"><span >Contact</span></a></li>
+	<li id="menu-item-46468" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-46468"><a href="https://www.retirebeforedad.com/legal/"><span >Terms &#038; Privacy Policy</span></a></li>
+	<li id="menu-item-64627" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-64627"><a href="https://www.retirebeforedad.com/"><span >Home</span></a></li>
+</ul>
+</li>
+<li id="menu-item-71550" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-71550"><a href="https://www.accessipos.com/?utm_source=rbd&#038;utm_medium=referral&#038;utm_campaign=menu"><span >IPOs</span></a></li>
+<li id="menu-item-37098" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-37098"><a href="https://www.retirebeforedad.com/category/reviews/"><span >Reviews</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-91327" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-91327"><a href="https://www.retirebeforedad.com/newretirement-review-retirement-calculator/"><span >NewRetirement Review</span></a></li>
+	<li id="menu-item-72969" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-72969"><a href="https://www.retirebeforedad.com/sure-dividend-review/"><span >Sure Dividend Review</span></a></li>
+	<li id="menu-item-77610" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-77610"><a href="https://www.retirebeforedad.com/yieldstreet-review/"><span >Yieldstreet Review</span></a></li>
+	<li id="menu-item-37099" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-37099"><a href="https://www.retirebeforedad.com/fundrise-review/"><span >Fundrise Review</span></a></li>
+	<li id="menu-item-41555" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-41555"><a href="https://www.retirebeforedad.com/m1-finance-review/"><span >M1 Finance Review</span></a></li>
+	<li id="menu-item-63418" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-63418"><a href="https://www.retirebeforedad.com/motley-fool-stock-advisor-review/"><span >Motley Fool Stock Advisor</span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-72972" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72972"><a href="https://www.retirebeforedad.com/motley-fool-rule-breakers-review/"><span >Motley Fool Rule Breakers</span></a></li>
+	</ul>
+</li>
+	<li id="menu-item-65381" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-65381"><a href="https://www.retirebeforedad.com/acretrader-review/"><span >AcreTrader Review</span></a></li>
+	<li id="menu-item-69041" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-69041"><a href="https://www.retirebeforedad.com/masterworks-review/"><span >Masterworks Review</span></a></li>
+	<li id="menu-item-67624" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-67624"><a href="https://www.retirebeforedad.com/roofstock-review/"><span >Roofstock Review</span></a></li>
+	<li id="menu-item-37780" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37780"><a href="https://www.retirebeforedad.com/peerstreet-review/"><span >PeerStreet Review</span></a></li>
+	<li id="menu-item-56377" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-56377"><a href="https://www.retirebeforedad.com/equitymultiple-review/"><span >EquityMultiple Review</span></a></li>
+	<li id="menu-item-1325" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1325"><a href="https://www.retirebeforedad.com/virginia529-simplified/"><span >Virginia 529 Review</span></a></li>
+</ul>
+</li>
+<li id="menu-item-15548" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-15548"><a href="https://www.retirebeforedad.com/recommended/"><span >Resources</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-91524" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-91524"><a href="https://www.retirebeforedad.com/yield-curve-chart/"><span >Yield Curve Chart</span></a></li>
+	<li id="menu-item-92277" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-92277"><a href="https://www.retirebeforedad.com/start-saving-for-retirement-at-40-50/"><span >Start Saving for Retirement</span></a></li>
+	<li id="menu-item-55097" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-55097"><a href="https://www.retirebeforedad.com/passive-income-ideas/"><span >Passive Income Ideas</span></a></li>
+	<li id="menu-item-62943" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-62943"><a href="https://www.retirebeforedad.com/best-online-brokers-dividend-reinvestment/"><span >Best Brokers for Dividends</span></a></li>
+	<li id="menu-item-19299" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19299"><a href="https://www.retirebeforedad.com/dividend-aristocrats/"><span >Dividend Aristocrats</span></a></li>
+	<li id="menu-item-26019" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26019"><a href="https://www.retirebeforedad.com/debt-free-sp-500-companies/"><span >Debt-Free S&#038;P 500 Stocks</span></a></li>
+	<li id="menu-item-63588" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-63588"><a href="https://www.retirebeforedad.com/best-real-estate-crowdfunding-platforms/"><span >Best Real Estate Crowdfunding Platforms</span></a></li>
+	<li id="menu-item-27795" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27795"><a href="https://www.retirebeforedad.com/affiliate-programs-blogging-resources/"><span >Affiliate Programs And Blogging</span></a></li>
+	<li id="menu-item-27878" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27878"><a href="https://www.retirebeforedad.com/how-to-start-an-online-business/"><span >How To Start An Online Business</span></a></li>
+</ul>
+</li>
+<li id="menu-item-1313" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1313"><a href="https://www.retirebeforedad.com/recommended/"><span >Recommended</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-93512" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-93512"><a href="https://www.retirebeforedad.com/NRBestCalc"><span >Retirement Calculator</span></a></li>
+	<li id="menu-item-23514" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-23514"><a target="_blank" rel="noopener" href="https://www.retirebeforedad.com/PCCalc"><span >Net Worth Calculator</span></a></li>
+	<li id="menu-item-43253" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-43253"><a href="https://www.retirebeforedad.com/recommended/"><span >Tools</span></a></li>
+	<li id="menu-item-37105" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37105"><a href="https://www.retirebeforedad.com/blogroll/"><span >Blogroll</span></a></li>
+	<li id="menu-item-27946" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27946"><a href="https://www.retirebeforedad.com/dads-blog-money/"><span >Dads Blog Money</span></a></li>
+</ul>
+</li>
+<li id="menu-item-62679" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-62679"><a target="_blank" rel="noopener" href="https://www.retirebeforedad.com/CCMenuBest"><span >Best Cards</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-62680" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-62680"><a target="_blank" rel="noopener" href="https://www.retirebeforedad.com/CCMenuTravel"><span >Travel Rewards</span></a></li>
+	<li id="menu-item-62681" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-62681"><a target="_blank" rel="noopener" href="https://www.retirebeforedad.com/CCMenuCashBack"><span >Cash Back</span></a></li>
+	<li id="menu-item-62682" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-62682"><a target="_blank" rel="noopener" href="https://www.retirebeforedad.com/CCMenuSmallBiz"><span >Small Business</span></a></li>
+	<li id="menu-item-62683" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-62683"><a target="_blank" rel="noopener" href="https://www.retirebeforedad.com/CCMenuAirline"><span >Airline Rewards</span></a></li>
+	<li id="menu-item-62684" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-62684"><a target="_blank" rel="noopener" href="https://www.retirebeforedad.com/CCMenuHotel"><span >Hotel Rewards</span></a></li>
+</ul>
+</li>
+</ul></div></nav></div></header><div class="site-inner"><div class="wrap"><div class="content-sidebar-wrap"><main class="content"><div class='code-block code-block-1' style='margin: 8px 0; clear: both;'>
+<em><span style="font-size: 10pt">This page may contain links to our partners. RBD may be compensated when a link is clicked. See the full disclosure <a href="https://www.retirebeforedad.com/legal/">here</a>.</span></em></div>
+<article class="post-60234 page type-page status-publish has-post-thumbnail mv-content-wrapper entry" aria-label="Airbnb Stock: Should You Invest in the Company Today?"><header class="entry-header"><h1 class="entry-title">Airbnb Stock: Should You Invest in the Company Today?</h1>
+</header><div class="entry-content"><p><img decoding="async" class="aligncenter wp-image-60245 size-full" title="Learn how to prepare for the upcoming Airbnb IPO. Explore ways to acquire pre-IPO Airbnb stock and follow along as the company approaches it's IPO date." src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20750%20400'%3E%3C/svg%3E" alt="Airbnb stock IPO logo" width="750" height="400" data-lazy-srcset="https://www.retirebeforedad.com/wp-content/uploads/2019/06/Airbnb_Logo.png 750w, https://www.retirebeforedad.com/wp-content/uploads/2019/06/Airbnb_Logo-400x213.png 400w" data-lazy-sizes="(max-width: 750px) 100vw, 750px" data-lazy-src="https://www.retirebeforedad.com/wp-content/uploads/2019/06/Airbnb_Logo.png" /><noscript><img decoding="async" class="aligncenter wp-image-60245 size-full" title="Learn how to prepare for the upcoming Airbnb IPO. Explore ways to acquire pre-IPO Airbnb stock and follow along as the company approaches it's IPO date." src="https://www.retirebeforedad.com/wp-content/uploads/2019/06/Airbnb_Logo.png" alt="Airbnb stock IPO logo" width="750" height="400" srcset="https://www.retirebeforedad.com/wp-content/uploads/2019/06/Airbnb_Logo.png 750w, https://www.retirebeforedad.com/wp-content/uploads/2019/06/Airbnb_Logo-400x213.png 400w" sizes="(max-width: 750px) 100vw, 750px" /></noscript></p>
+<p><em>Airbnb stock is now open for trading. </em><em>Open an account with a commission-free broker such as <a href="https://www.retirebeforedad.com/M1Airbnb" target="_blank" rel="nofollow noopener noreferrer"><span style="font-size: 14pt;"><strong>M1 Finance</strong></span></a> and buy the stock today (details on how below).</em></p>
+<hr>
+<p><strong>*** Airbnb IPO is open for trading. First trade was $146 (1:38 pm EST) ***</strong></p>
+<p><strong>*** Airbnb IPO prices IPO at $68 (6:35pm EST) ***</strong></p>
+<p style="text-align: center;"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSIS6nIMDQV1b0me2eySkWZBAN0yWkXlop3hfr6hQsuNJdS4GsK4X5s8ogbcpn5QtgtP63RJOcvPD1F/pubhtml?gid=0&amp;single=true&amp;chrome=false&amp;headers=false&amp;range=b2:d8" width="360" height="210"></iframe></p>
+<p><strong>Airbnb S-1 filing now available. <a href="https://www.retirebeforedad.com/airbnb-stock/#s1">Read it here</a>.</strong></p>
+<p>Did you receive IPO shares from your broker (excluding Airbnb hosts)? Which broker do you use? <a href="https://www.retirebeforedad.com/contact-me/">Contact me</a> with details to provide better information to readers in the future.&nbsp;</p>
+<hr>
+<div id="ez-toc-container" class="ez-toc-v2_0_46 counter-hierarchy ez-toc-counter ez-toc-container-direction">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a href="#" class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle" aria-label="ez-toc-toggle-icon-1"><label for="item-642f119e2ecef" aria-label="Table of Content"><span style="display: flex;align-items: center;width: 35px;height: 30px;justify-content: center;direction:ltr;"><svg style="fill: #529136;color:#529136" xmlns="http://www.w3.org/2000/svg" class="list-377408" width="20px" height="20px" viewBox="0 0 24 24" fill="none"><path d="M6 6H4v2h2V6zm14 0H8v2h12V6zM4 11h2v2H4v-2zm16 0H8v2h12v-2zM4 16h2v2H4v-2zm16 0H8v2h12v-2z" fill="currentColor"></path></svg><svg style="fill: #529136;color:#529136" class="arrow-unsorted-368013" xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" viewBox="0 0 24 24" version="1.2" baseProfile="tiny"><path d="M18.2 9.3l-6.2-6.3-6.2 6.3c-.2.2-.3.4-.3.7s.1.5.3.7c.2.2.4.3.7.3h11c.3 0 .5-.1.7-.3.2-.2.3-.5.3-.7s-.1-.5-.3-.7zM5.8 14.7l6.2 6.3 6.2-6.3c.2-.2.3-.5.3-.7s-.1-.5-.3-.7c-.2-.2-.4-.3-.7-.3h-11c-.3 0-.5.1-.7.3-.2.2-.3.5-.3.7s.1.5.3.7z"/></svg></span></label><input  type="checkbox" id="item-642f119e2ecef"></a></span></div>
+<nav><ul class='ez-toc-list ez-toc-list-level-1 eztoc-visibility-hide-by-default' ><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-1" href="#Latest_Airbnb_Stock_IPO_News" title="Latest Airbnb Stock IPO News">Latest Airbnb Stock IPO News</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-2" href="#What_is_Airbnb" title="What is Airbnb?">What is Airbnb?</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-3" href="#Is_Airbnb_Publicly_Traded" title="Is Airbnb Publicly Traded?">Is Airbnb Publicly Traded?</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-4" href="#When_was_the_Airbnb_IPO_date" title="When was the Airbnb IPO date?">When was the Airbnb IPO date?</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-5" href="#What_is_the_AirBnB_Stock_Symbol_Airbnb_Ticker" title="What is the AirBnB Stock Symbol, Airbnb Ticker??">What is the AirBnB Stock Symbol, Airbnb Ticker??</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-6" href="#What_is_the_Airbnb_Stock_Price" title="What is the Airbnb Stock Price?">What is the Airbnb Stock Price?</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-7" href="#Will_Airbnb_Stock_be_a_Motley_Fool_Stock_Advisor_Recommendation" title="Will Airbnb Stock be a Motley Fool Stock Advisor Recommendation?">Will Airbnb Stock be a Motley Fool Stock Advisor Recommendation?</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-8" href="#Should_You_Invest_in_Airbnb_After_the_IPO" title="Should You Invest in Airbnb After the IPO?">Should You Invest in Airbnb After the IPO?</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-9" href="#Airbnb_S-1_Filing" title="Airbnb S-1 Filing">Airbnb S-1 Filing</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-10" href="#Can_I_Buy_Airbnb_Stock_Three_Potential_Ways" title="Can I Buy Airbnb Stock? Three Potential Ways">Can I Buy Airbnb Stock? Three Potential Ways</a><ul class='ez-toc-list-level-3'><li class='ez-toc-heading-level-3'><a class="ez-toc-link ez-toc-heading-11" href="#1_Buy_Airbnb_Stock_After_the_Airbnb_IPO" title="1. Buy Airbnb Stock After the Airbnb IPO">1. Buy Airbnb Stock After the Airbnb IPO</a></li><li class='ez-toc-page-1 ez-toc-heading-level-3'><a class="ez-toc-link ez-toc-heading-12" href="#2_Buy_Stock_in_the_Airbnb_Initial_Public_Offering_IPO" title="2. Buy Stock in the Airbnb Initial Public Offering (IPO)">2. Buy Stock in the Airbnb Initial Public Offering (IPO)</a></li><li class='ez-toc-page-1 ez-toc-heading-level-3'><a class="ez-toc-link ez-toc-heading-13" href="#3_The_Airbnb_Directed_Share_Program_for_Hosts" title="3. The Airbnb Directed Share Program for Hosts">3. The Airbnb Directed Share Program for Hosts</a></li></ul></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-14" href="#Airbnb_Stock_News_Archive" title="Airbnb Stock News Archive">Airbnb Stock News Archive</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-15" href="#Conclusion" title="Conclusion">Conclusion</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="Latest_Airbnb_Stock_IPO_News"></span>Latest Airbnb Stock IPO News<span class="ez-toc-section-end"></span></h2>
+<p><strong>12/10/2020: </strong>Airbnb IPO is complete &#8211; All investors can now own the stock<br />
+<strong>12/09/2020: </strong>Airbnb IPO prices IPO at $68<br />
+<strong>12/08/2020:</strong> <a href="https://www.cnbc.com/amp/2020/12/08/cramer-sees-strong-2021-after-airbnb-ipo.html" target="_blank" rel="nofollow noopener noreferrer">Cramer predicts</a> a strong 2021 rebound for Airbnb after IPO<br />
+<strong>12/06/2020:</strong> WSJ: <a href="https://www.wsj.com/articles/airbnb-boosts-ipo-price-range-to-between-56-and-60-a-share-11607302117" target="_blank" rel="nofollow noopener noreferrer">Airbnb Boosts</a> IPO Price Range to Between $56 and $60 a Share<br />
+<strong>12/01/2020:</strong> Eligible Fidelity customers may indicate interest for Airbnb IPO (<a href="https://www.retirebeforedad.com/airbnb-stock/#fidelity">see below</a>)<br />
+<strong>12/01/2020: </strong>ClickIPO accepting interest through app (via TS) and Webull (<a href="https://www.retirebeforedad.com/airbnb-stock/#clickipo">see below</a>)<br />
+<strong>12/01/2020: </strong>Airbnb <a href="https://www.cnbc.com/2020/12/01/airbnb-ipo-seeks-valuation-of-up-to-35-billion.html" target="_blank" rel="nofollow noopener noreferrer">seeks valuation</a> of up to $35 billion in its IPO<br />
+<strong>11/30/2020: </strong>Airbnb and DoorDash plan to <a href="https://markets.businessinsider.com/news/stocks/airbnb-and-doordash-target-higher-valuations-for-december-ipo-2020-11-1029848143" target="_blank" rel="nofollow noopener noreferrer">target higher valuations</a> for their December IPOs<br />
+<strong>11/16/2020: </strong>Hosts may be eligible to participate via a directed share program (see below)&nbsp;<br />
+<strong>11/16/2020: </strong>The Airbnb S-1 filing is now available to the public.<br />
+<strong>11/10/2020: </strong>Airbnb Said to <a href="https://www.bloomberg.com/news/articles/2020-11-10/airbnb-is-said-to-push-back-ipo-filing-to-avoid-election-overlap" target="_blank" rel="nofollow noopener noreferrer">Delay </a>IPO Filing to Distance It From Election.&nbsp;<br />
+<strong>11/05/2020:</strong> Reuters: Airbnb to make <a href="https://www.reuters.com/article/airbnb-ipo-idUSKBN27L1D7" target="_blank" rel="noopener noreferrer">IPO filing (public) next week</a>, braving COVID-19 surge<br />
+<a href="https://www.retirebeforedad.com/airbnb-stock/#news" rel="nofollow">Older news&#8230;</a></p>
+<hr>
+<h2><span class="ez-toc-section" id="What_is_Airbnb"></span>What is Airbnb?<span class="ez-toc-section-end"></span></h2>
+<p>Airbnb is a marketplace that empowers homeowners and landlords to rent their properties to tourists and those in need of a night&#8217;s stay. Potential visitors can find unique accommodations and avoid staying in a hotel.</p>
+<p>Property owners become hosts and make money by letting people stay in their homes. They list the property on Airbnb with pictures, and potential visitors browse the area for a place that works for them.</p>
+<p>The model works for a basement apartment or a mansion in the Hollywood Hills. If there&#8217;s a demand for a place to stay, and the property is right for the potential visitor, the entire transaction occurs on the Airbnb platform.</p>
+<p><span style="font-size: 14pt;"><strong><a href="https://www.retirebeforedad.com/AirbnbStay" target="_blank" rel="nofollow noopener noreferrer">Click here</a></strong></span> to browse properties on Airbnb and book your first room. You can also consider <span style="font-size: 14pt;"><strong><a href="https://www.retirebeforedad.com/AirbnbHost" target="_blank" rel="nofollow noopener noreferrer">becoming a host</a></strong></span> yourself.</p>
+<h2><span class="ez-toc-section" id="Is_Airbnb_Publicly_Traded"></span>Is Airbnb Publicly Traded?<span class="ez-toc-section-end"></span></h2>
+<p>Yes. The company became a publicly-traded company on <strong>December 10th, 2020 at 1:38 pm EST</strong>.&nbsp;</p>
+<p>Now that the stock is open and trading, you can buy it from any online brokerage account.</p>
+<h2><span class="ez-toc-section" id="When_was_the_Airbnb_IPO_date"></span>When was the Airbnb IPO date?<span class="ez-toc-section-end"></span></h2>
+<p>The IPO priced the evening of December 9th, and debuted on <strong>Thursday, December 10th.&nbsp;</strong></p>
+<h2><span class="ez-toc-section" id="What_is_the_AirBnB_Stock_Symbol_Airbnb_Ticker"></span>What is the AirBnB Stock Symbol, Airbnb Ticker??<span class="ez-toc-section-end"></span></h2>
+<p>The Airbnb stock symbol is &#8220;ABNB&#8221; and trades on the NASDAQ stock exchange.&nbsp;</p>
+<h2><span class="ez-toc-section" id="What_is_the_Airbnb_Stock_Price"></span>What is the Airbnb Stock Price?<span class="ez-toc-section-end"></span></h2>
+<p>The Airbnb IPO priced at $68 per share, above the expected range of $56-$60 per share range.</p>
+<p>The stock opened at $146, 115% above the IPO price.</p>
+<p>The current Airbnb stock price is below:</p>
+<p style="text-align: center;"><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSIS6nIMDQV1b0me2eySkWZBAN0yWkXlop3hfr6hQsuNJdS4GsK4X5s8ogbcpn5QtgtP63RJOcvPD1F/pubhtml?gid=0&amp;single=true&amp;chrome=false&amp;headers=false&amp;range=b2:d8" width="360" height="210"></iframe></p>
+<h2><span class="ez-toc-section" id="Will_Airbnb_Stock_be_a_Motley_Fool_Stock_Advisor_Recommendation"></span>Will Airbnb Stock be a Motley Fool Stock Advisor Recommendation?<span class="ez-toc-section-end"></span></h2>
+<p>Sign up with the <span style="font-size: 14pt;"><strong><em><a href="https://www.retirebeforedad.com/MFSAAirbnb" target="_blank" rel="nofollow noopener noreferrer">Motley Fool Stock Advisor</a></em></strong></span> newsletter service to learn if Airbnb is a current recommendation, and if it is, when is a good time to buy.</p>
+<p>Airbnb fits the mold of high-growth, disruptive business models that the Fool typically recommends.&nbsp;</p>
+<p>When the Motley Fool recommends a company, there is usually an immediate spike in the price. Fool newsletter subscribers are notoriously long-term minded and rarely sell, meaning the stock price will continue to rise.</p>
+<p>Sign up now to get regular high-growth stock tips. The newsletter is well-worth the cost.&nbsp;</p>
+<p>Airbnb may also receive a recommendation by the <span style="font-size: 14pt;"><strong><a href="https://www.retirebeforedad.com/MFRBAirbnb"><em>Motley Fool Rule Breakers</em></a></strong></span> newsletter, its high-growth stock recommendation service.</p>
+<p>Both services have handily beaten the broader market since the early 2000s.&nbsp;</p>
+<p>Read this <a href="https://www.retirebeforedad.com/motley-fool-stock-advisor-review/" rel="">Motley Fool Stock Advisor review</a> to learn about their stock selection methodologies and about how you can participate in excellent returns.</p>
+<p style="text-align: center;"><a class="fasc-button fasc-size-xlarge fasc-type-popout fasc-rounded-medium" style="background-color: #ee0000; color: #ffffff;" target="_blank" rel="nofollow noopener" href="https://www.retirebeforedad.com/MFSAAirbnb">Join Now for 50% Off!</a></p>
+<h2><span class="ez-toc-section" id="Should_You_Invest_in_Airbnb_After_the_IPO"></span>Should You Invest in Airbnb After the IPO?<span class="ez-toc-section-end"></span></h2>
+<p>This site encourages long-term buy and hold investing instead of short-term trading. Think about your investment in Airbnb in 5-10-year increments.</p>
+<p>What does Airbnb&#8217;s business look like a decade from now?</p>
+<p>Jim Cramer had this to say on his show December 8th:</p>
+<blockquote><p>I want you to own Airbnb because it&#8217;s set to have a terrific year starting next March. If you can get the stock for $68 or less this week, I&#8217;d back up the truck. If you can get it for less than $85, I&#8217;m granting you a small position. Any higher, though, and I&#8217;m going to have to say you&#8217;ve got to keep your bat on your shoulder and wait for a better pitch.</p></blockquote>
+<p>This rundown at <a href="https://thegeneralist.substack.com/p/airbnb-the-disaster-artist" target="_blank" rel="noopener noreferrer">The Generalist</a> is an excellent overview and a good place to fortify your research.&nbsp;</p>
+<p>Here&#8217;s another take by <a href="https://www.profgalloway.com/" target="_blank" rel="noopener noreferrer">Scott Galloway</a>, a Marketing professor at NYU Stern who thinks Airbnb stock can reach a $100 billion valuation by 2022.</p>
+<p style="text-align: center;"><iframe loading="lazy" src="https://www.youtube.com/embed/ZUVNfTHHCXA" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>
+<h2 id="s1"><span class="ez-toc-section" id="Airbnb_S-1_Filing"></span>Airbnb S-1 Filing<span class="ez-toc-section-end"></span></h2>
+<p>The Airbnb S-1 filing (amended version, Dec 7th) is available in HTML format on the SEC website <a href="https://www.sec.gov/Archives/edgar/data/1559720/000119312520311265/d81668ds1a.htm" target="_blank" rel="nofollow noopener noreferrer">here</a>.&nbsp;</p>
+<p>Previous and amended versions of the Airbnb S-1 filing are posted <a href="https://www.sec.gov/cgi-bin/browse-edgar?CIK=1559720" target="_blank" rel="nofollow noopener noreferrer">here</a>.</p>
+<p>The company seeks to raise up to $3.1 million by issuing 51.9 million shares at a price range of $56-$60 per share.</p>
+<p>That would value the company at a range of $39 to $42 billion market capitalization.</p>
+<p>The following is an Airbnb S-1 <a href="https://www.retirebeforedad.com/AirbnbIPOS1" target="_blank" rel="nofollow noopener noreferrer">PDF printed version</a> of the original filing.</p>
+<p align="center"><iframe loading="lazy" src="https://drive.google.com/file/d/1a0u6F2uFYD4JiEK6xBk9RqD_xt03mX8L/preview" width="100%" height="700"></iframe></p>
+<h2><span class="ez-toc-section" id="Can_I_Buy_Airbnb_Stock_Three_Potential_Ways"></span>Can I Buy Airbnb Stock? Three Potential Ways<span class="ez-toc-section-end"></span></h2>
+<p>Now that Airbnb stock is a publicly-traded company, only #1 below is an option for investors. #2 and #3 will remain in this list for investors who aspire to acquire IPO shares of other offerings in the future.&nbsp;</p>
+<ol>
+<li>Buy Airbnb Stock After it Begins Trading</li>
+<li><del>Buy Airbnb Stock in the Initial Public Offering&nbsp;</del></li>
+<li><del>The Airbnb Directed Share Program for Hosts&nbsp;</del></li>
+</ol>
+<h3><span class="ez-toc-section" id="1_Buy_Airbnb_Stock_After_the_Airbnb_IPO"></span>1. Buy Airbnb Stock After the Airbnb IPO<span class="ez-toc-section-end"></span></h3>
+<p>The IPO completed on December 10th. Even though you didn&#8217;t get Airbnb at the IPO price, you can still own the company.</p>
+<p>In some cases, investors can get in at a price near or below the IPO price (if the stock falls).&nbsp;</p>
+<p>This is not always true. Uber opened below the IPO price and took more than a year to recover.&nbsp;</p>
+<p>You can own the company today, buying Airbnb stock through a no-fee online brokerage account after trading begins.</p>
+<p>So what is the best online brokerage for buying Airbnb stock?</p>
+<p>As an individual investor, you&#8217;ll want to open an account with a <strong>commission-free broker</strong>. That way, you&#8217;ll invest most of your money instead of waste it on fees.</p>
+<p>I&#8217;ll go over one of my favorites below. It has zero commissions and will make it easy to buy Airbnb stock once it begins trading on open stock markets.&nbsp;</p>
+<h4>What is the Best Online Broker to Buy Airbnb Stock after the IPO?</h4>
+<p>Active traders who want to own Airbnb immediately when it begins trading, I recommend <span style="font-size: 14pt;"><strong><a href="https://www.retirebeforedad.com/RHAirbnb" target="_blank" rel="nofollow noopener noreferrer">Robinhood</a> </strong></span>(<em>current deal — new customers get a free stock worth up to $279</em>). Robinhood does not offer IPO access.&nbsp;</p>
+<p>On the contrary, long-term investors may prefer an online broker that&#8217;s better for dollar cost averaging and <a href="https://www.retirebeforedad.com/best-online-brokers-dividend-reinvestment/">dividend reinvestment</a>.&nbsp;</p>
+<p>I&#8217;m a big fan of the online brokerage <span style="font-size: 14pt;"><strong><a href="https://www.retirebeforedad.com/M1Airbnb" target="_blank" rel="nofollow noopener noreferrer">M1 Finance</a></strong></span>. M1 Finance is a reliable and robust, no-fee online broker for beginner to intermediate investors. It&#8217;s easy to get started.</p>
+<p>As your investing skills and portfolio mature, M1 is one of the best platforms to scale.</p>
+<p>Investing in stocks is 100% free on the platform. Read my complete <a href="https://www.retirebeforedad.com/m1-finance-review/">M1 Finance review here</a>.&nbsp;</p>
+<p>M1 Finance <strong>does not offer IPO access</strong>, but it&#8217;s my favorite for long-term buy and hold investing — my preferred strategy for Airbnb stock.&nbsp;</p>
+<p>The platform is more intuitive than old school brokers because it&#8217;s built on a modern technology platform. You create your ideal portfolio first, then fund it over time.</p>
+<p>Simply fund your account add Airbnb stock to your portfolio pie.</p>
+<p style="text-align: center;"><a class="fasc-button fasc-size-xlarge fasc-type-popout fasc-rounded-medium" style="background-color: #18c4be; color: #ffffff;" target="_blank" rel="nofollow noopener noreferrer" href="https://www.retirebeforedad.com/M1Airbnb">Learn More about M1 Finance</a></p>
+<h3><span class="ez-toc-section" id="2_Buy_Stock_in_the_Airbnb_Initial_Public_Offering_IPO"></span>2. Buy Stock in the Airbnb Initial Public Offering (IPO)<span class="ez-toc-section-end"></span></h3>
+<p><strong>It is too late to participate in the Airbnb IPO if you have not indicated interest with a broker yet. See previous section.&nbsp;</strong></p>
+<p><strong>Demand is extremely high, making it very difficult to acquire pre-IPO shares.&nbsp;</strong></p>
+<p>Position yourself now for future IPOs.</p>
+<p>IPOs have always been available to the wealthiest customers of the leading brokerage firms. That&#8217;s great if you&#8217;re wealthy. Certain online brokers are better for IPO investing than others.</p>
+<p>Financial technology is changing the way ordinary investors can invest in IPO. You can now invest in select IPOs.</p>
+<p>The top broker for accessing IPOs today is <span style="font-size: 14pt;"><strong><a href="https://www.retirebeforedad.com/TSAirbnb" target="_blank" rel="nofollow noopener noreferrer">TradeStation</a></strong></span>.</p>
+<p>TradeStation has partnered with the IPO investing app <strong>ClickIPO</strong> to give its customers seamless access to IPOs and follow-on offerings.</p>
+<p>The company empowers ordinary investors to invest in IPOs through their existing brokerage account.</p>
+<p>The ClickIPO app is available to all US-based investors today for research and indicating interest in IPO shares. Link your existing online brokerage at TradeStation to get started.</p>
+<p>The minimum to invest in upcoming IPOs is $500.</p>
+<p>Another broker for accessing IPOs today is <span style="font-size: 14pt;"><strong><a href="https://www.retirebeforedad.com/WebullAirbnb" target="_blank" rel="nofollow noopener noreferrer">Webull</a>,</strong></span> which has also partnered with <strong>ClickIPO</strong> to bring direct IPO access through its investing app.</p>
+<p>Webull is a smartphone-first broker similar to Robinhood but has built a significant desktop trading platform as well.&nbsp;</p>
+<p>Unlike Robinhood, Webull offers free access to IPOs.</p>
+<p>You can start buying IPOs once you deposit your first $100 to Webull. Deposit $100 or more and receive at least <strong>two free stocks</strong> (often more).</p>
+<p>Read this <a href="https://accessipos.com/webull-review-ipo-investing/?utm_source=rbd&amp;utm_medium=referral&amp;utm_campaign=airbnb" target="_blank" rel="noopener noreferrer">Webull review for IPOs</a> to learn more.&nbsp;</p>
+<p>For a more extensive list of IPO-friendly online brokers and their eligibility, <a href="http://accessipos.com/best-online-brokers-ipo-investing/?utm_source=rbd&amp;utm_medium=referral&amp;utm_campaign=airbnb" rel="">check out this page</a>. Fidelity (see below), Morgan Stanley, TD Ameritrade, and Schwab are the most likely to receive allocations for their customers.</p>
+<p><a href="https://accessipos.com/free-ebook/?utm_source=rbd&amp;utm_medium=referral&amp;utm_campaign=airbnb" rel="">Click here</a> to download the free 15-page eBook, <strong><em>How to Invest in IPOs – A Fundamental Guide for Ordinary Investors.</em></strong></p>
+<p>Joining a broker that offers access to IPOs does not guarantee an allocation, especially high-demand IPOs such as Airbnb. You may be better off waiting for the company to start trading after the IPO.&nbsp;</p>
+<h4 id="fidelity">Fidelity</h4>
+<p><strong>Fidelity update 7:33 am EST: &#8220;To be eligible for an allocation of shares in this offering, you MUST confirm your indication of interest through Fidelity.com or by calling 800-544-5631 by, 9:00 AM ET Thursday, 12/09/2020.&#8221;</strong></p>
+<p>Fidelity accepting indications of interest for the Airbnb IPO for eligible customers as of December 1st. Indication of interest does not guarantee an allocation.&nbsp;</p>
+<p>Log into your desktop Fidelity account. Go to News &amp; Research, then IPOs.</p>
+<p><strong>Demand is extremely high, making it very difficult to acquire pre-IPO shares.&nbsp;</strong><br />
+<img decoding="async" class="aligncenter wp-image-69922 size-full" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20700%20434'%3E%3C/svg%3E" alt="Airbnb stock was available via Fidelity during the Airbnb IPO." width="700" height="434" data-lazy-srcset="https://www.retirebeforedad.com/wp-content/uploads/2020/12/FidelityAirbnbIPO2.jpg 700w, https://www.retirebeforedad.com/wp-content/uploads/2020/12/FidelityAirbnbIPO2-400x248.jpg 400w" data-lazy-sizes="(max-width: 700px) 100vw, 700px" data-lazy-src="https://www.retirebeforedad.com/wp-content/uploads/2020/12/FidelityAirbnbIPO2.jpg" /><noscript><img decoding="async" class="aligncenter wp-image-69922 size-full" src="https://www.retirebeforedad.com/wp-content/uploads/2020/12/FidelityAirbnbIPO2.jpg" alt="Airbnb stock was available via Fidelity during the Airbnb IPO." width="700" height="434" srcset="https://www.retirebeforedad.com/wp-content/uploads/2020/12/FidelityAirbnbIPO2.jpg 700w, https://www.retirebeforedad.com/wp-content/uploads/2020/12/FidelityAirbnbIPO2-400x248.jpg 400w" sizes="(max-width: 700px) 100vw, 700px" /></noscript></p>
+<h4 id="clickipo">ClickIPO</h4>
+<p>ClickIPO is displaying the Airbnb IPO and letting people indicate interest. No guarantee they will receive an allocation. <strong>Demand is extremely high, making it very difficult to acquire pre-IPO shares.&nbsp;</strong></p>
+<p>Only TradeStation customers can access IPOs through the ClickIPO app at this stage. Webull customers can indicate interest in the Webull app.&nbsp;</p>
+<p><img decoding="async" class="size-full wp-image-69918 aligncenter" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20453'%3E%3C/svg%3E" alt="" width="300" height="453" data-lazy-srcset="https://www.retirebeforedad.com/wp-content/uploads/2020/12/ClickIPOAirbnb.jpg 300w, https://www.retirebeforedad.com/wp-content/uploads/2020/12/ClickIPOAirbnb-265x400.jpg 265w" data-lazy-sizes="(max-width: 300px) 100vw, 300px" data-lazy-src="https://www.retirebeforedad.com/wp-content/uploads/2020/12/ClickIPOAirbnb.jpg" /><noscript><img decoding="async" class="size-full wp-image-69918 aligncenter" src="https://www.retirebeforedad.com/wp-content/uploads/2020/12/ClickIPOAirbnb.jpg" alt="" width="300" height="453" srcset="https://www.retirebeforedad.com/wp-content/uploads/2020/12/ClickIPOAirbnb.jpg 300w, https://www.retirebeforedad.com/wp-content/uploads/2020/12/ClickIPOAirbnb-265x400.jpg 265w" sizes="(max-width: 300px) 100vw, 300px" /></noscript></p>
+<h4>Webull</h4>
+<p>Webull is displaying both Airbnb and DoorDash, but no indication if Webull (via ClickIPO) will receive a meaningful allocation.&nbsp;</p>
+<p><strong>Demand is extremely high, making it very difficult to acquire pre-IPO shares.&nbsp;</strong></p>
+<p><img decoding="async" class="size-full wp-image-69919 aligncenter" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20350%20622'%3E%3C/svg%3E" alt="" width="350" height="622" data-lazy-srcset="https://www.retirebeforedad.com/wp-content/uploads/2020/12/WebullAirbnbDoorDashIPO.jpg 350w, https://www.retirebeforedad.com/wp-content/uploads/2020/12/WebullAirbnbDoorDashIPO-225x400.jpg 225w" data-lazy-sizes="(max-width: 350px) 100vw, 350px" data-lazy-src="https://www.retirebeforedad.com/wp-content/uploads/2020/12/WebullAirbnbDoorDashIPO.jpg" /><noscript><img decoding="async" class="size-full wp-image-69919 aligncenter" src="https://www.retirebeforedad.com/wp-content/uploads/2020/12/WebullAirbnbDoorDashIPO.jpg" alt="" width="350" height="622" srcset="https://www.retirebeforedad.com/wp-content/uploads/2020/12/WebullAirbnbDoorDashIPO.jpg 350w, https://www.retirebeforedad.com/wp-content/uploads/2020/12/WebullAirbnbDoorDashIPO-225x400.jpg 225w" sizes="(max-width: 350px) 100vw, 350px" /></noscript></p>
+<h3><span class="ez-toc-section" id="3_The_Airbnb_Directed_Share_Program_for_Hosts"></span>3. The Airbnb Directed Share Program for Hosts<span class="ez-toc-section-end"></span></h3>
+<p><strong>This offering is now closed.</strong></p>
+<p><em>Thanks to those who already reached out. Good luck!</em></p>
+<p>BIG NEWS: The S-1 filing indicates there will be a <strong>directed share program</strong> for hosts! That means, if you&#8217;re a host, you may be able to access Airbnb IPO shares.&nbsp;</p>
+<p>Here&#8217;s the text from the S-1 filing, updated after the amended release on December 1st:</p>
+<blockquote><p>At our request, the underwriters have reserved up to <strong>3,500,000 shares of Class A common stock, or 7.0%</strong> of the shares offered by us in this offering, for sale at the initial public offering price through a directed share program to eligible U.S. hosts and certain individuals identified by our officers and directors. For hosts, those who reside in the United States and had by November 1, 2020 accepted a reservation that began, or was scheduled to begin, in 2019 or 2020 are potentially eligible for the program. Airbnb employees are not eligible. If demand for the program exceeds capacity, we may invite hosts to participate based on tenure, as determined by the year they first hosted on Airbnb.&nbsp;</p>
+<p>The number of shares of Class A common stock available for sale to the general public will be reduced to the extent that such persons purchase such reserved shares. Any reserved shares not so purchased will be offered by the underwriters to the general public on the same basis as the other shares offered by this prospectus. Morgan Stanley &amp; Co. LLC will administer our directed share program.</p></blockquote>
+<p>HOSTS: Watch your emails for communication from Airbnb about the directed share program. You may be able to participate in the IPO.</p>
+<h4>Updates from Hosts</h4>
+<p>A few hosts have reached out with information about receiving emails from Morgan Stanley about the directed share program. Emails went out on December 1st.&nbsp;</p>
+<p>The main takeaway was that shares were limited. One host reported only being able to indicate interest for up to 275 shares or $16,500 (actual allocation will likely be smaller). Minimum investment was set at $300.&nbsp;</p>
+<p>Participation required opening a &#8220;special brokerage account&#8221; with Morgan Stanley and shares available on a first come, first served basis.&nbsp;</p>
+<p>One reader wrote:</p>
+<blockquote><p>I&#8217;m wondering if you know where Airbnb hosts who qualified for the IPO can reach out if we didn&#8217;t receive the offer (we&#8217;re 2 years with Airbnb, in the U.S., superhosts, above average revenue, filled out the paperwork the day we received it).</p></blockquote>
+<p>Emails came from this email account: <strong>&#8220;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="432e2c3124222d3037222d2f263a273033032e2c3124222d3037222d2f263a6d202c2e">[email&#160;protected]</a>&#8221;</strong>. Check your Airbnb email account and spam.&nbsp;</p>
+<p>Another reader wrote:</p>
+<blockquote><p>Hi ~ I’m a super host on Airbnb and was invited to buy IPO shares. I’ve set up my account with Morgan Stanley and the ACH is all set to go. Do you have any advise as to how many shares I should buy or any other advise for me? Thanks so much!</p></blockquote>
+<p>Based on demand, I&#8217;d say as much as you can afford! This email came on December 2nd, indicating the account setup process happened quickly.&nbsp;</p>
+<p>Another email:</p>
+<blockquote><p>I am an Airbnb host who received an invitation to participate in the host Pre-IPO stock purchase. I was lucky an got my account approved the first day. They closed the application process after 24 hours due to so much interest. I will be happy to share information if your still interested.</p></blockquote>
+<p>Thanks to the readers who reached out. I did not post a copy of the email from Morgan Stanley because it is too long. The bottom line is that this opportunity was briefly open, it looks like on December 1st, and closed on December 2nd. .&nbsp;</p>
+<p>Here&#8217;s a question received on 12/07 at 6pm EST:</p>
+<blockquote><p>Any update on The Airbnb Directed Share Program for Hosts? We didn&#8217;t receive any notification so I&#8217;m looking all over before the stock goes live.</p></blockquote>
+<p>Answer: From what I&#8217;ve heard, eligible hosts (as defined in the S-1) received an email from Morgan Stanley on December 1st. With tight demand, hosts needed to respond quickly, likely within 24 hours or less to participate. Those who responded successfully should have been contacted to open a special account with Morgan Stanley for the IPO. If you haven&#8217;t been contacted to set up the account, my guess is you did not respond quickly enough. If you never received an email from Morgan Stanley, you were likely not eligible.&nbsp;</p>
+<p>Keep in mind, access to this IPO is a privledge, not a right, and these rollouts are difficult to execute flawlessly in short time. Some eligible may not have received the email, or not in time. Others got lucky, saw the email right away, and signed up. Airbnb and Morgan Stanley don&#8217;t owe anyone anything, even for those who responded in time.&nbsp;</p>
+<p>For those that moved quickly, congratulations and good luck. For the rest, I&#8217;m sorry. These kinds of opportunities are rare! See above section 1: <em>Buy Airbnb Stock After the Airbnb IPO.</em></p>
+<h2 id="news"><span class="ez-toc-section" id="Airbnb_Stock_News_Archive"></span>Airbnb Stock News Archive<span class="ez-toc-section-end"></span></h2>
+<p><strong>10/31/2020:</strong> How Airbnb is giving hosts a <a href="https://www.airbnb.com/resources/hosting-homes/a/how-were-giving-hosts-a-seat-at-the-table-283" target="_blank" rel="noopener noreferrer">seat at the table</a><br />
+<strong>10/27/2020:</strong> Airbnb Stock to <a href="https://news.airbnb.com/airbnb-and-nasdaq/">List on the Nasdaq Exchange</a>&nbsp;<br />
+<strong>10/25/2020: </strong>Airbnb Tells Shareholder Group Board <a href="https://www.bloomberg.com/news/articles/2020-10-25/airbnb-tells-shareholder-group-board-has-approved-share-split">Approves Share Split</a><br />
+<strong>10/21/2020: </strong>Airbnb teaming up with former <a href="https://www.cnbc.com/2020/10/21/airbnb-teaming-up-with-former-apple-design-boss-jony-ive.html" target="_blank" rel="noopener noreferrer">Apple design boss Jony Ive</a><br />
+<strong>10/16/2020: </strong>Here&#8217;s why Airbnb is the <a href="https://www.profgalloway.com/airbnballer" target="_blank" rel="noopener noreferrer">most valuable private company</a> in America<br />
+<strong>10/03/2020: </strong>Airbnb seeks to raise <a href="https://www.reuters.com/article/airbnb-ipo/exclusive-airbnb-aims-to-raise-roughly-3-billion-in-ipo-sources-idUSKBN26O08G" target="_blank" rel="nofollow noopener noreferrer">roughly $3 billion</a> in IPO &#8211; Valuation Approximately $30 Billion<br />
+<strong>09/23/2020: </strong>Airbnb <a href="https://www.businessinsider.in/business/startups/news/airbnb-ceo-brian-chesky-on-the-companys-ipo-when-the-markets-ready-for-airbnb-it-will-go-public/articleshow/78276873.cms" target="_blank" rel="nofollow noopener noreferrer">CEO Brian Chesky</a> on the company&#8217;s IPO⁠— &#8216;When the market&#8217;s ready for Airbnb, it will go public&#8217;<br />
+<strong>09/17/2020: </strong>Airbnb Opponents <a href="https://www.theinformation.com/articles/airbnb-opponents-take-fight-to-sec-ahead-of-ipo" target="_blank" rel="nofollow noopener noreferrer">Take Fight to SEC</a> Ahead of IPO<br />
+<strong>09/09/2020:</strong> How Airbnb got its IPO plans <a href="https://theconversation.com/how-airbnb-got-its-ipo-plans-back-on-track-145794" target="_blank" rel="nofollow noopener noreferrer">back on track</a><br />
+<strong>09/03/2020: </strong>Airbnb <a href="https://www.cnbc.com/2020/09/03/airbnb-spurns-approach-to-go-public-through-ackmans-blank-check-company.html" target="_blank" rel="noopener noreferrer">spurns approach</a> to go public through Bill Ackman’s blank-check company<br />
+<strong>08/28/2020: </strong>Airbnb’s IPO Opens <a href="https://www.forbes.com/sites/jenniferleighparker/2020/08/28/airbnbs-ipo-opens-path-to-market-dominance/" target="_blank" rel="nofollow noopener noreferrer">Path To Market Dominance</a><br />
+<strong>08/24/2020: </strong>Airbnb IPO could be the ‘steal of the century,’ <a href="https://www.cnbc.com/2020/08/24/airbnb-ipo-could-be-the-steal-of-the-century-jim-cramer-says.html" target="_blank" rel="nofollow noopener noreferrer">Jim Cramer says</a><br />
+<strong>08/24/2020: </strong>Airbnb is set for a blockbuster IPO &#8211; <a href="https://www.phocuswire.com/airbnb-set-for-blockbuster-ipo" target="_blank" rel="nofollow noopener noreferrer">here&#8217;s why</a> (opinion piece)<br />
+<strong>08/19/2020:</strong> <a href="https://www.cnbc.com/2020/08/19/airbnb-has-filed-confidential-ipo-paperwork.html" target="_blank" rel="nofollow noopener noreferrer">Airbnb has filed confidential</a> IPO paperwork<br />
+<strong>08/11/2020: </strong>Airbnb plans to <a href="https://www.cnbc.com/2020/08/11/airbnb-plans-to-confidentially-file-for-ipo-this-month.html" target="_blank" rel="nofollow noopener noreferrer">confidentially file</a> for IPO this month<br />
+<strong>07/22/2020:</strong> Airbnb approached about <a href="https://www.reuters.com/article/us-airbnb-ipo/airbnb-approached-about-blank-check-company-merger-for-public-listing-ceo-idUSKCN24N335" target="_blank" rel="nofollow noopener noreferrer">blank-check company merger</a> for public listing: CEO<br />
+<strong>07/15/2020: </strong><a href="https://www.google.com/search?q=airbnb+says+its+ipo+plans+are+back+on+track&amp;oq=airbnb+says+its+ipo+plans+are+back+on+track" target="_blank" rel="nofollow noopener noreferrer">Airbnb Says</a> Its IPO. Plans Are Back on Track<br />
+<strong>06/30/2020: </strong>Airbnb <a href="https://fortune.com/2020/06/30/airbnbceo-brian-chesky-bookings-rentals-recovery-2020-ipo-coronavirus-pandemic/" target="_blank" rel="noopener noreferrer">could still IPO in 2020</a>, CEO Brian Chesky says: ‘It has exceeded everything we expected’<br />
+<strong>06/09/2020:</strong> Airbnb revives <a href="https://www.axios.com/airbnb-restarts-ipo-conversations-coronavirus-cb07a71a-48ad-4ed3-92df-52cb0e80dcc6.html" target="_blank" rel="nofollow noopener noreferrer">internal IPO conversations</a><br />
+<strong>06/08/2020: </strong>Airbnb Joins Vacation-Rental Sites Seeing <a href="https://www.bloomberg.com/news/articles/2020-06-07/airbnb-joins-vacation-rental-sites-seeing-surge-in-summer-demand" target="_blank" rel="noopener noreferrer">Surge in Demand</a><br />
+<strong>05/06/2020: </strong><a href="https://www.cnbc.com/2020/05/06/airbnb-hosts-are-building-their-own-direct-booking-websites-in-revolt.html" target="_blank" rel="noopener noreferrer">Airbnb hosts</a> are building their own direct booking websites in revolt<br />
+<b>04/15/2020: </b>Airbnb to <a href="https://www.cnbc.com/2020/05/05/airbnb-to-lay-off-nearly-1900-people-25percent-of-company.html" target="_blank" rel="noopener noreferrer">lay off nearly 1,900 people</a>, 25% of company<br />
+<b>04/15/2020: </b>Airbnb <a href="https://www.cnbc.com/2020/04/14/airbnb-raises-another-1-billion-in-debt.html" target="_blank" rel="noopener noreferrer">raising another $1 billion in debt</a> as coronavirus ravages tourism business<br />
+<b>04/06/2020: </b>Airbnb Raises $1 Billion In New Funding. An <a href="https://www.barrons.com/articles/airbnb-raises-1-billion-but-an-ipo-seems-unlikely-soon-51586218432" target="_blank" rel="noopener noreferrer">IPO Seems Unlikely Anytime Soon</a><br />
+<b>04/03/2020: </b><a href="https://amp.ft.com/content/02a8ca9b-1ba9-4e0a-a3d5-084dd93469bb?__twitter_impression=true" target="_blank" rel="noopener noreferrer">Airbnb lowers internal valuation</a> by 16% to $26bn<br />
+<strong>02/11/2020</strong>: <a href="https://www.cnbc.com/2020/02/11/airbnb-reportedly-lost-money-last-year-as-costs-ballooned.html" target="_blank" rel="noopener noreferrer">Airbnb Swings to a Loss</a> as Costs Climb Ahead of IPO<br />
+<b>11/18/2019:</b> Jim Cramer of CNBC interviews <a href="https://www.cnbc.com/video/2019/11/18/airbnb-ceo-the-ipo-process-olympic-housing-a-safe-marketplace-and-more.html" target="_blank" rel="noopener noreferrer">Airbnb CEO Brian Chesky</a><br />
+<strong>10/08/2019:</strong> <a href="https://www.cnbc.com/video/2019/10/07/airbnb-is-gearing-up-to-be-the-most-anticipated-ipo-of-2020-heres-why.html" target="_blank" rel="noopener noreferrer">Airbnb is gearing up to be the most anticipated IPO of 2020, here&#8217;s why</a> &#8211; Video about the upcoming Airbnb IPO.&nbsp;<br />
+<strong>10/01/2019:</strong> <a href="https://www.bloomberg.com/news/articles/2019-10-01/airbnb-is-planning-for-direct-listing-instead-of-traditional-ipo" target="_blank" rel="noopener noreferrer">Airbnb Leans Toward Direct Listing Over Traditional IPO</a><br />
+<strong>09/19/2019:</strong><a href="https://www.businessinsider.com/airbnb-announces-plan-to-go-public-in-2020-ipo-2019-9" target="_blank" rel="noopener noreferrer">$31 billion Airbnb announces plan to go public in 2020</a></p>
+<h2><span class="ez-toc-section" id="Conclusion"></span>Conclusion<span class="ez-toc-section-end"></span></h2>
+<p>Time is running out to participate in the Airbnb IPO. If you&#8217;re not positioned to participate, keep a long-term view and consider buying the stock after trading begins.&nbsp;</p>
+<p>But that&#8217;s not necessarily a reason to be disappointed. Google&#8217;s shares rose 18% on the day of its IPO. Many people probably sold that day. Had they held for the next decade, their holdings would have been up 1,000%.</p>
+<p>If Airbnb is a truly remarkable business, the real money will be made over the next decade, not on the IPO date.&nbsp;</p>
+<p>Please perform due diligence on the SEC S-1 filing and don&#8217;t buy Airbnb stock with money you can&#8217;t afford to lose.&nbsp;</p>
+<p><span style="font-size: 10pt;">* Disclosure: The web page contains affiliate links from our partners. If a reader opens an account or buys a service from a link in this article, we may be compensated at no additional cost to the reader. Opening an account with a broker that provides access to IPOs does not guarantee the customer allocations of specific IPOs.&nbsp;</span></p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Please Share!</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-60234" class="share-twitter sd-button share-icon no-text" href="https://www.retirebeforedad.com/airbnb-stock/?share=twitter" target="_blank" title="Click to share on Twitter" ><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-60234" class="share-facebook sd-button share-icon no-text" href="https://www.retirebeforedad.com/airbnb-stock/?share=facebook" target="_blank" title="Click to share on Facebook" ><span></span><span class="sharing-screen-reader-text">Click to share on Facebook (Opens in new window)</span></a></li><li class="share-reddit"><a rel="nofollow noopener noreferrer" data-shared="" class="share-reddit sd-button share-icon no-text" href="https://www.retirebeforedad.com/airbnb-stock/?share=reddit" target="_blank" title="Click to share on Reddit" ><span></span><span class="sharing-screen-reader-text">Click to share on Reddit (Opens in new window)</span></a></li><li class="share-pinterest"><a rel="nofollow noopener noreferrer" data-shared="sharing-pinterest-60234" class="share-pinterest sd-button share-icon no-text" href="https://www.retirebeforedad.com/airbnb-stock/?share=pinterest" target="_blank" title="Click to share on Pinterest" ><span></span><span class="sharing-screen-reader-text">Click to share on Pinterest (Opens in new window)</span></a></li><li class="share-linkedin"><a rel="nofollow noopener noreferrer" data-shared="sharing-linkedin-60234" class="share-linkedin sd-button share-icon no-text" href="https://www.retirebeforedad.com/airbnb-stock/?share=linkedin" target="_blank" title="Click to share on LinkedIn" ><span></span><span class="sharing-screen-reader-text">Click to share on LinkedIn (Opens in new window)</span></a></li><li class="share-email"><a rel="nofollow noopener noreferrer" data-shared="" class="share-email sd-button share-icon no-text" href="/cdn-cgi/l/email-protection#91aee2e4f3fbf4f2e5acb4a4d3c2f9f0e3f4f5b4a3a1c1fee2e5b4a4d5b4a3a1d0f8e3f3fff3b4a3a1c2e5fef2fab4a2d0b4a3a1c2f9fee4fdf5b4a3a1c8fee4b4a3a1d8ffe7f4e2e5b4a3a1f8ffb4a3a1e5f9f4b4a3a1d2fefce1f0ffe8b4a3a1c5fef5f0e8b4a2d7b7f3fef5e8acf9e5e5e1e2b4a2d0b4a3d7b4a3d7e6e6e6bfe3f4e5f8e3f4f3f4f7fee3f4f5f0f5bff2fefcb4a3d7f0f8e3f3fff3bce2e5fef2fab4a3d7b7e2f9f0e3f4acf4fcf0f8fd" target="_blank" title="Click to email a link to a friend" data-email-share-error-title="Do you have email set up?" data-email-share-error-text="If you&#039;re having problems sharing via email, you might not have email set up for your browser. You may need to create a new email yourself." data-email-share-nonce="bae7cc9000" data-email-share-track-url="https://www.retirebeforedad.com/airbnb-stock/?share=email"><span></span><span class="sharing-screen-reader-text">Click to email a link to a friend (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div><div class='code-block code-block-2' style='margin: 8px auto 8px 0; text-align: left; display: block; clear: both;'>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="rocketlazyloadscript" async data-uid="e802ae95a1" data-rocket-src="https://anatoc-media-llc.ck.page/e802ae95a1/index.js"></script>
+<p><span style="font-size: 18pt;"><strong>Favorite tools and investment services right now:</strong></span></p>
+<p><span style="font-size: 14pt;"><strong><a href="https://www.retirebeforedad.com/FundriseBio" target="_blank" rel="nofollow noopener noreferrer">Fundrise</a></strong></span> - The easiest way to invest in high-quality real estate with as little as $10 (<a href="https://www.retirebeforedad.com/fundrise-review/" rel="nofollow">review</a>)</p>
+<p><span style="font-size: 14pt;"><strong><a href="https://www.retirebeforedad.com/go/PCBio" target="_blank" rel="nofollow noopener noreferrer">Empower (Personal Capital is now Empower)</a></strong></span> - A free tool to track your net worth and analyze investments.</p>
+<p><span style="font-size: 14pt;"><a href="https://www.retirebeforedad.com/M1Bio"><strong>M1 Finance</strong></a></span> - A top online broker for long-term investors and dividend reinvestment (<a href="https://www.retirebeforedad.com/m1-finance-review/" rel="nofollow">review</a>)</p>
+<p><span style="font-size: 14pt;"><strong><a href="https://www.retirebeforedad.com/SaveBetterH" target="_blank" rel="nofollow noopener noreferrer">SaveBetter</a></strong></span> - SaveBetter is a simpler way to access high-yield, FDIC-insured savings products.</p></div>
+<!-- AI CONTENT END 2 -->
+</div></article></main><aside class="sidebar sidebar-primary widget-area" role="complementary" aria-label="Primary Sidebar"><section id="sfmsb_settings-2" class="widget sfmsb_widget"><div class="widget-wrap"><div class="sfmsb-follow-social-buttons sfmsb-under sfmsb-square 38 sfmsb-horizontal"><a target="_blank" href="https://twitter.com/RetireBeforeDad"><span class="sfmsb-icon-twitter sfmsb-square" style="color:#55acee;font-size:38px;" data-color="#55acee"></span></a><a target="_blank" href="https://www.facebook.com/RetireBeforeDad"><span class="sfmsb-icon-facebook sfmsb-square" style="color:#3a5795;font-size:38px;" data-color="#3a5795"></span></a><a target="_blank" href="https://www.retirebeforedad.com/feed/"><span class="sfmsb-icon-feed sfmsb-square" style="color:#ffa500;font-size:38px;" data-color="#ffa500"></span></a><a target="_blank" href="https://www.pinterest.com/retirebeforedad/"><span class="sfmsb-icon-pinterest sfmsb-square" style="color:#cb2027;font-size:38px;" data-color="#cb2027"></span></a><a target="_blank" href="https://www.retirebeforedad.com/contact-me/"><span class="sfmsb-icon-email sfmsb-square" style="color:#2758a6;font-size:38px;" data-color="#2758a6"></span></a><a target="_blank" href="https://feedly.com/i/subscription/feed%2Fhttp%3A%2F%2Fretirebeforedad.com%2Ffeed%2F"><span class="sfmsb-icon-feedly sfmsb-square" style="color:#87bf31;font-size:38px;" data-color="#87bf31"></span></a><div class="sfmsb-clearfix"></div></div></div></section>
+<section id="text-18" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><h3>Services I Use Every Day</h3>
+<p><span style="font-size: 12pt;">Personal Banking: <a href="https://www.retirebeforedad.com/WellsFargo" target="_blank" rel="nofollow noopener"><strong>Wells Fargo</strong></a><br />
+Travel Credit: <strong>Chase Sapphire Preferred</strong><br />
+Primary Savings: <a href="https://www.marcus.com/" target="_blank" rel="nofollow noopener"><strong>Marcus</strong></a><br />
+Primary Broker: <a href="https://www.retirebeforedad.com/go/Fidelity" target="_blank" rel="nofollow noopener"><strong>Fidelity</strong></a><br />
+DRIP Broker: <a href="https://www.retirebeforedad.com/M1Sidebar" target="_blank" rel="nofollow noopener"><strong>M1 Finance</strong></a><br />
+Biz Banking: <a href="https://www.retirebeforedad.com/WellsFargo" target="_blank" rel="nofollow noopener"><strong>Wells Fargo</strong></a><br />
+Biz Credit: <strong>Chase Ink Business Preferred</strong><br />
+Net Worth Calculator: <strong><a href="https://www.retirebeforedad.com/PCSidebar" target="_blank" rel="nofollow noopener">Empower</a></strong></span></p>
+</div>
+		</div></section>
+<section id="media_image-2" class="widget widget_media_image"><div class="widget-wrap"><a href="https://www.retirebeforedad.com/SubscribeToRBD"><img width="400" height="400" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3C/svg%3E" class="image wp-image-17357  attachment-full size-full" alt="" decoding="async" style="max-width: 100%; height: auto;" data-lazy-srcset="https://www.retirebeforedad.com/wp-content/uploads/2015/12/steams-of-income-square400px.jpg 400w, https://www.retirebeforedad.com/wp-content/uploads/2015/12/steams-of-income-square400px-150x150.jpg 150w" data-lazy-sizes="(max-width: 400px) 100vw, 400px" data-lazy-src="https://www.retirebeforedad.com/wp-content/uploads/2015/12/steams-of-income-square400px.jpg" /><noscript><img width="400" height="400" src="https://www.retirebeforedad.com/wp-content/uploads/2015/12/steams-of-income-square400px.jpg" class="image wp-image-17357  attachment-full size-full" alt="" decoding="async" style="max-width: 100%; height: auto;" srcset="https://www.retirebeforedad.com/wp-content/uploads/2015/12/steams-of-income-square400px.jpg 400w, https://www.retirebeforedad.com/wp-content/uploads/2015/12/steams-of-income-square400px-150x150.jpg 150w" sizes="(max-width: 400px) 100vw, 400px" /></noscript></a></div></section>
+<section id="text-14" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><p><a href="https://www.retirebeforedad.com/how-to-start-an-online-business/"><img decoding="async" class="alignleft wp-image-28200" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20333'%3E%3C/svg%3E" alt="" width="400" height="333" data-lazy-src="https://www.retirebeforedad.com/wp-content/uploads/2016/12/how-to-start-an-online-business-widget300px.jpg" /><noscript><img decoding="async" class="alignleft wp-image-28200" src="https://www.retirebeforedad.com/wp-content/uploads/2016/12/how-to-start-an-online-business-widget300px.jpg" alt="" width="400" height="333" /></noscript></a></p>
+</div>
+		</div></section>
+<section id="text-20" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><div></div>
+<div data-mbt-widget-set="default"></div>
+</div>
+		</div></section>
+</aside></div></div></div><div class="footer-widgets"><div class="wrap"><div class="widget-area footer-widgets-1 footer-widget-area"><section id="text-15" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><p style="text-align: center;"><a href="https://www.retirebeforedad.com">Home</a><br />
+<a href="https://www.retirebeforedad.com/about-me/">About</a><br />
+<a href="https://www.retirebeforedad.com/featured/">Featured on</a><br />
+<a href="https://www.retirebeforedad.com/recommended/">Resources</a><br />
+<a href="https://www.retirebeforedad.com/legal/" rel="nofollow">Website Terms/Privacy Policy/Full Disclaimer</a></p>
+<p>ADVERTISING DISCLOSURE: This website engages in affiliate marketing. This means that if you use an affiliate link to make a purchase, the website will receive a commission on that purchase. All efforts are made to ensure that affiliate links are disclosed in accordance with the FTC. Retire Before Dad has partnered with Cardratings for our coverage of credit card products. Retire Before Dad and CardRatings may receive a commission from card issuers. The Website uses Mediavine to manage all third-party advertising on the Website. This website is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and links to Amazon.com.</p>
+</div>
+		</div></section>
+</div><div class="widget-area footer-widgets-2 footer-widget-area"><section id="text-16" class="widget widget_text"><div class="widget-wrap"><h4 class="widget-title widgettitle">Disclaimer</h4>
+			<div class="textwidget"><p>Read the full Disclaimer policy <a href="https://www.retirebeforedad.com/legal/" rel="nofollow">here</a>.</p>
+<p>Opinions, reviews, analyses &amp; recommendations are the author’s alone, and have not been reviewed, endorsed or approved by any of these entities. We have made every effort to ensure that all information on this website is accurate. We make no guarantees regarding the results that you will see from using the information provided on the website. We are individual investors, not financial advisors, tax professionals or investment professionals. All information on the site is provided for entertainment and informational purposes only and should not be considered advice. Do not make investment decisions based on the information provided on this website. This website may discuss topics related to finance and investing. The information provided on this websites is provided &#8220;as is&#8221; without any representations or warranties, express or implied. The website makes no representations or warranties in relation to the financial and investing information on the website. You must not rely on the information on the website as an alternative to advice from a certified public accountant or licensed financial planner. We assume no responsibility for errors or omissions that may appear in the website. You should never delay seeking financial advice, disregard financial advice, or discontinue professional financial services as a result of any information provided on the website.</p>
+</div>
+		</div></section>
+</div></div></div><footer class="site-footer"><div class="wrap"><div class="credits">Copyright &copy; 2023 Retire Before Dad &middot; Custom site by <a target="_blank" href="https://moonsteamdesign.com">Moonsteam Design</a></div><p></p></div></footer></div><div class="overlay overlay-slidedown"><button type="button" class="overlay-close">Close</button><form class="search-form" method="get" action="https://www.retirebeforedad.com/" role="search"><input class="search-form-input" type="search" name="s" id="searchform-1" placeholder="Search the site"><input class="search-form-submit" type="submit" value="&#xf002;"><meta content="https://www.retirebeforedad.com/?s={s}"></form></div>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/www.retirebeforedad.com\/airbnb-stock\/":60234};
+	</script>
+						<script type='text/javascript' src='https://www.retirebeforedad.com/wp-content/plugins/data-tables-generator-by-supsystic/app/assets/js/dtgsnonce.js?ver=0.01' id='dtgs_nonce_frontend-js' defer></script>
+<script type='text/javascript' id='dtgs_nonce_frontend-js-after'>
+var DTGS_NONCE_FRONTEND = "2acf77cb4a"
+</script>
+<script type='text/javascript' id='wp-polls-js-extra'>
+/* <![CDATA[ */
+var pollsL10n = {"ajax_url":"https:\/\/www.retirebeforedad.com\/wp-admin\/admin-ajax.php","text_wait":"Your last request is still being processed. Please wait a while ...","text_valid":"Please choose a valid poll answer.","text_multiple":"Maximum number of choices allowed: ","show_loading":"0","show_fading":"0"};
+/* ]]> */
+</script>
+<script data-minify="1" type='text/javascript' src='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/plugins/wp-polls/polls-js.js?ver=1680444726' id='wp-polls-js' defer></script>
+<script type='text/javascript' id='md-responsive-menu-js-extra'>
+/* <![CDATA[ */
+var genesis_responsive_menu = {"mainMenu":"","menuIconClass":"dashicons-before dashicons-menu","subMenu":"Submenu","subMenuIconsClass":"dashicons-before dashicons-arrow-down-alt2","menuClasses":{"combine":[".nav-primary"],"others":[]}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.retirebeforedad.com/wp-content/themes/md_retirebeforedad/js/responsive-menus.min.js?ver=1' id='md-responsive-menu-js' defer></script>
+<script data-minify="1" type='text/javascript' src='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/themes/md_retirebeforedad/js/classie.js?ver=1680444726' id='classie-js' defer></script>
+<script data-minify="1" type='text/javascript' src='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/themes/md_retirebeforedad/js/demo1.js?ver=1680444726' id='demo1-js' defer></script>
+<script type='text/javascript' src='https://www.retirebeforedad.com/wp-content/plugins/wp-review-pro/public/js/js.cookie.min.js?ver=2.1.4' id='js-cookie-js' defer></script>
+<script data-minify="1" type='text/javascript' src='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/plugins/wp-review-pro/public/js/jquery.appear.js?ver=1680444726' id='wp_review-jquery-appear-js' defer></script>
+<script type='text/javascript' src='https://www.retirebeforedad.com/wp-includes/js/underscore.min.js?ver=1.13.4' id='underscore-js' defer></script>
+<script type='text/javascript' id='wp-util-js-extra'>
+/* <![CDATA[ */
+var _wpUtilSettings = {"ajax":{"url":"\/wp-admin\/admin-ajax.php"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.retirebeforedad.com/wp-includes/js/wp-util.min.js?ver=73deacfcd4fb215c15193f1c4f9aa7a9' id='wp-util-js' defer></script>
+<script type='text/javascript' id='wp_review-js-js-extra'>
+/* <![CDATA[ */
+var wpreview = {"ajaxurl":"https:\/\/www.retirebeforedad.com\/wp-admin\/admin-ajax.php","popup":{"enable":false,"width":"800px","animation_in":"bounceIn","animation_out":"bounceOut","overlay_color":"#0b0b0b","overlay_opacity":0.8,"post_type":"post","queryby":"category","orderby":"random","category":0,"tag":0,"review_type":0,"limit":6,"expiration":30,"cookie_name":"wpr-popup","delay":0,"show_on_load":false,"show_on_reach_bottom":false,"exit_intent":true,"screen_size_check":false,"screen_width":""},"rateAllFeatures":"Please rate all features","verifiedPurchase":"(Verified purchase)","commentImageUploadNonce":"4e0ba559d6"};
+/* ]]> */
+</script>
+<script data-minify="1" type='text/javascript' src='https://www.retirebeforedad.com/wp-content/cache/min/1/wp-content/plugins/wp-review-pro/public/js/main.js?ver=1680444726' id='wp_review-js-js' defer></script>
+<script type='text/javascript' src='https://www.retirebeforedad.com/wp-content/plugins/wp-review-pro/public/js/jquery.knob.min.js?ver=1.1' id='jquery-knob-js' defer></script>
+<script type='text/javascript' src='https://www.retirebeforedad.com/wp-content/plugins/easy-table-of-contents/vendor/js-cookie/js.cookie.min.js?ver=2.2.1' id='ez-toc-js-cookie-js' defer></script>
+<script type='text/javascript' src='https://www.retirebeforedad.com/wp-content/plugins/easy-table-of-contents/vendor/sticky-kit/jquery.sticky-kit.min.js?ver=1.9.2' id='ez-toc-jquery-sticky-kit-js' defer></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"1","width":"auto","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.retirebeforedad.com/wp-content/plugins/easy-table-of-contents/assets/js/front.min.js?ver=2.0.46-1679552669' id='ez-toc-js-js' defer></script>
+<script type='text/javascript' id='sharing-js-js-extra'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.retirebeforedad.com/wp-content/plugins/jetpack/_inc/build/sharedaddy/sharing.min.js?ver=11.9.1' id='sharing-js-js' defer></script>
+<script type='text/javascript' id='sharing-js-js-after'>
+var windowOpen;
+			( function () {
+				function matches( el, sel ) {
+					return !! (
+						el.matches && el.matches( sel ) ||
+						el.msMatchesSelector && el.msMatchesSelector( sel )
+					);
+				}
+
+				document.body.addEventListener( 'click', function ( event ) {
+					if ( ! event.target ) {
+						return;
+					}
+
+					var el;
+					if ( matches( event.target, 'a.share-twitter' ) ) {
+						el = event.target;
+					} else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-twitter' ) ) {
+						el = event.target.parentNode;
+					}
+
+					if ( el ) {
+						event.preventDefault();
+
+						// If there's another sharing window open, close it.
+						if ( typeof windowOpen !== 'undefined' ) {
+							windowOpen.close();
+						}
+						windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+						return false;
+					}
+				} );
+			} )();
+var windowOpen;
+			( function () {
+				function matches( el, sel ) {
+					return !! (
+						el.matches && el.matches( sel ) ||
+						el.msMatchesSelector && el.msMatchesSelector( sel )
+					);
+				}
+
+				document.body.addEventListener( 'click', function ( event ) {
+					if ( ! event.target ) {
+						return;
+					}
+
+					var el;
+					if ( matches( event.target, 'a.share-facebook' ) ) {
+						el = event.target;
+					} else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-facebook' ) ) {
+						el = event.target.parentNode;
+					}
+
+					if ( el ) {
+						event.preventDefault();
+
+						// If there's another sharing window open, close it.
+						if ( typeof windowOpen !== 'undefined' ) {
+							windowOpen.close();
+						}
+						windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+						return false;
+					}
+				} );
+			} )();
+var windowOpen;
+			( function () {
+				function matches( el, sel ) {
+					return !! (
+						el.matches && el.matches( sel ) ||
+						el.msMatchesSelector && el.msMatchesSelector( sel )
+					);
+				}
+
+				document.body.addEventListener( 'click', function ( event ) {
+					if ( ! event.target ) {
+						return;
+					}
+
+					var el;
+					if ( matches( event.target, 'a.share-linkedin' ) ) {
+						el = event.target;
+					} else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-linkedin' ) ) {
+						el = event.target.parentNode;
+					}
+
+					if ( el ) {
+						event.preventDefault();
+
+						// If there's another sharing window open, close it.
+						if ( typeof windowOpen !== 'undefined' ) {
+							windowOpen.close();
+						}
+						windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+						return false;
+					}
+				} );
+			} )();
+</script>
+	<script src='https://stats.wp.com/e-202314.js' defer></script>
+	<script>
+		_stq = window._stq || [];
+		_stq.push([ 'view', {v:'ext',blog:'62853355',post:'60234',tz:'-4',srv:'www.retirebeforedad.com',j:'1:11.9.1'} ]);
+		_stq.push([ 'clickTrackerInit', '62853355', '60234' ]);
+	</script><script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://www.retirebeforedad.com/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script><script>class RocketElementorAnimation{constructor(){this.deviceMode=document.createElement("span"),this.deviceMode.id="elementor-device-mode",this.deviceMode.setAttribute("class","elementor-screen-only"),document.body.appendChild(this.deviceMode)}_detectAnimations(){let t=getComputedStyle(this.deviceMode,":after").content.replace(/"/g,"");this.animationSettingKeys=this._listAnimationSettingsKeys(t),document.querySelectorAll(".elementor-invisible[data-settings]").forEach(t=>{const e=t.getBoundingClientRect();if(e.bottom>=0&&e.top<=window.innerHeight)try{this._animateElement(t)}catch(t){}})}_animateElement(t){const e=JSON.parse(t.dataset.settings),i=e._animation_delay||e.animation_delay||0,n=e[this.animationSettingKeys.find(t=>e[t])];if("none"===n)return void t.classList.remove("elementor-invisible");t.classList.remove(n),this.currentAnimation&&t.classList.remove(this.currentAnimation),this.currentAnimation=n;let s=setTimeout(()=>{t.classList.remove("elementor-invisible"),t.classList.add("animated",n),this._removeAnimationSettings(t,e)},i);window.addEventListener("rocket-startLoading",function(){clearTimeout(s)})}_listAnimationSettingsKeys(t="mobile"){const e=[""];switch(t){case"mobile":e.unshift("_mobile");case"tablet":e.unshift("_tablet");case"desktop":e.unshift("_desktop")}const i=[];return["animation","_animation"].forEach(t=>{e.forEach(e=>{i.push(t+e)})}),i}_removeAnimationSettings(t,e){this._listAnimationSettingsKeys().forEach(t=>delete e[t]),t.dataset.settings=JSON.stringify(e)}static run(){const t=new RocketElementorAnimation;requestAnimationFrame(t._detectAnimations.bind(t))}}document.addEventListener("DOMContentLoaded",RocketElementorAnimation.run);</script></body></html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1680806302 -->
